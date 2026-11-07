@@ -1,6 +1,6 @@
 # storm per PC: synth per drone (versione PS1 in originale_psx/).
 # Un solo codice C11 per Windows, macOS e Linux: le differenze stanno qui e dentro SDL3/RtMidi.
-cmake_minimum_required(VERSION 3.21)
+cmake_minimum_required(VERSION 3.24)
 
 # macOS 11 e' la prima versione per Apple Silicon; va detto prima di project()
 set(CMAKE_OSX_DEPLOYMENT_TARGET 11.0 CACHE STRING "")

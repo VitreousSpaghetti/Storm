@@ -12,6 +12,7 @@ due librerie; nel codice del synth non ci sono `#ifdef` di piattaforma.
 Nessun'altra dipendenza senza decisione esplicita.
 
 ## Compilare
+Serve CMake 3.24 o piu' (lo chiedono RtMidi e, su macOS, SDL3).
 ```bash
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build --config Release
@@ -33,14 +34,15 @@ Note:
   basta, serve Impostazioni di Sistema > Privacy e sicurezza > "Apri comunque" (oppure
   `xattr -dr com.apple.quarantine storm.app`). Il MIDI non chiede permessi.
 - Linux: l'utente deve poter usare il sequencer ALSA (di solito si'). Pacchetti per compilare
-  (Ubuntu/Debian):
+  (Ubuntu/Debian). Su Ubuntu 22.04 apt da' CMake 3.22, troppo vecchio: prendere il 3.24 o piu'
+  con `pip install cmake` oppure dal repository apt di Kitware (apt.kitware.com).
   ```bash
   sudo apt-get install build-essential cmake ninja-build pkg-config libasound2-dev libx11-dev libxext-dev libxrandr-dev libxcursor-dev libxfixes-dev libxi-dev libxss-dev libxtst-dev libxkbcommon-dev libwayland-dev libdecor-0-dev libegl1-mesa-dev libgl1-mesa-dev libgles2-mesa-dev libdrm-dev libgbm-dev libpulse-dev libpipewire-0.3-dev libdbus-1-dev libudev-dev libibus-1.0-dev
   ```
 
 ## Audio
 - Frequenza del dispositivo (44100 o 48000 Hz): il synth calcola alla sua frequenza interna
-  (storm: 22050 Hz come la PS1) e SDL converte.
+  (storm: 44100 Hz come la SPU della PS1) e SDL converte.
 - Buffer piccolo: obiettivo **meno di 15 ms dal tasto MIDI al suono**. Il thread audio non alloca
   memoria, non apre file, non aspetta lock: riceve le azioni da una coda senza blocchi.
 

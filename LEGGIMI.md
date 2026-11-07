@@ -16,6 +16,7 @@ Versione per computer di **storm**, il synth per drone nato per la PS1 PAL. Si s
 
 ## Compilare
 In generale vedi [standard/piattaforme/piattaforme.md](standard/piattaforme/piattaforme.md).
+Serve CMake 3.24 o piu' (lo chiedono RtMidi e, su macOS, SDL3).
 SDL3 (release 3.4.20) e RtMidi 6.0.0 si scaricano da soli alla prima configurazione.
 
 Su Windows con gcc di MSYS2 UCRT64 e cmake/ninja del PSn00bSDK (il PATH cambia solo dentro lo
@@ -33,7 +34,9 @@ cmake --build build
 ```
 Il risultato e' `build/storm.app`, universale (Apple Silicon e Intel) e firmata ad-hoc.
 
-Su Linux (Ubuntu/Debian; compilato su Ubuntu 22.04 gira anche sulle distro di 2-3 anni fa):
+Su Linux (Ubuntu/Debian; compilato su Ubuntu 22.04 gira anche sulle distro di 2-3 anni fa).
+Su Ubuntu 22.04 apt da' CMake 3.22, troppo vecchio: prendere il 3.24 o piu' con
+`pip install cmake` oppure dal repository apt di Kitware (apt.kitware.com).
 ```bash
 sudo apt-get install build-essential cmake ninja-build pkg-config libasound2-dev libx11-dev libxext-dev libxrandr-dev libxcursor-dev libxfixes-dev libxi-dev libxss-dev libxtst-dev libxkbcommon-dev libwayland-dev libdecor-0-dev libegl1-mesa-dev libgl1-mesa-dev libgles2-mesa-dev libdrm-dev libgbm-dev libpulse-dev libpipewire-0.3-dev libdbus-1-dev libudev-dev libibus-1.0-dev
 cmake -G Ninja -S . -B build -DCMAKE_BUILD_TYPE=Release

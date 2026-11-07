@@ -27,6 +27,7 @@ jobs:
       - name: Compila
         shell: msys2 {0}
         run: |
+          cmake --version
           cmake -G Ninja -S . -B build -DCMAKE_BUILD_TYPE=Release
           cmake --build build
       - name: Prove
@@ -36,13 +37,17 @@ jobs:
         with:
           name: md5-windows
           path: storm pc/out/md5.txt
+      # i due file in una cartella sola, cosi' nello zip stanno affiancati;
       # l'artefatto si scarica gia' come storm-windows.zip
+      - name: Pacchetto
+        shell: bash
+        run: |
+          mkdir pacchetto
+          cp build/storm.exe LEGGIMI.md pacchetto/
       - uses: actions/upload-artifact@v4
         with:
           name: storm-windows
-          path: |
-            storm pc/build/storm.exe
-            storm pc/LEGGIMI.md
+          path: storm pc/pacchetto/
 
   macos:
     runs-on: macos-latest
@@ -52,6 +57,7 @@ jobs:
           path: storm pc
       - name: Compila (universale arm64 + x86_64)
         run: |
+          cmake --version
           cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64"
           cmake --build build --parallel
       - name: Controlla architetture e firma
@@ -98,9 +104,10 @@ jobs:
           sudo apt-get install -y build-essential cmake ninja-build pkg-config libasound2-dev libx11-dev libxext-dev libxrandr-dev libxcursor-dev libxfixes-dev libxi-dev libxss-dev libxtst-dev libxkbcommon-dev libwayland-dev libdecor-0-dev libegl1-mesa-dev libgl1-mesa-dev libgles2-mesa-dev libdrm-dev libgbm-dev libpulse-dev libpipewire-0.3-dev libdbus-1-dev libudev-dev libibus-1.0-dev
       - name: Compila
         run: |
+          cmake --version
           cmake -G Ninja -S . -B build -DCMAKE_BUILD_TYPE=Release
           cmake --build build
-      # MIDI con ALSA e senza JACK (su file: con pipefail "ldd | grep -q" puo' fallire per niente)
+      # MIDI con ALSA e senza JACK (ldd su file e poi grep: si legge anche l'elenco nel log)
       - name: Controlla librerie
         run: |
           ldd build/storm > ldd.txt
