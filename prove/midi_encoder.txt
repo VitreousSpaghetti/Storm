@@ -1,0 +1,8 @@
+# Encoder senza fine (con prove/midi_encoder.mappa: CC 16 = FOLD relativo): +5, poi -2
+# secondi  dispositivo  evento
+0.0   mouse muovi 160 120
+0.2   controlla FOLD = 25
+0.5   midi cc 16 5
+0.55  midi cc 16 126
+0.7   controlla FOLD = 28
+1.0   fine

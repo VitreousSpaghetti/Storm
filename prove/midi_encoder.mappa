@@ -1,0 +1,2 @@
+# Mappa della prova midi_encoder.txt: CC 16 come encoder senza fine
+cc 16       = FOLD relativo # 1-63 = su, 65-127 = giu'

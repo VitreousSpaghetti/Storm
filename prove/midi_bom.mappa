@@ -1,0 +1,2 @@
+﻿cc 75 = RES # prima riga dopo il BOM UTF-8: deve valere
+# Mappa della prova midi_bom.txt: salvata con il BOM UTF-8, come fanno alcuni editor

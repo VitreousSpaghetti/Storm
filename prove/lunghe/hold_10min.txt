@@ -1,0 +1,43 @@
+# HOLD per 10 minuti: REVERB 99, ROOM SPACE, TAIL 99 (la coda resta), poi niente piu' suono in
+# ingresso (VOLUME e LAYERS a 0). La coda deve restare, senza crescere ne' saturare.
+# secondi  dispositivo  evento
+1.0   pad2 destra giu
+3.6   pad2 destra su
+4.0   pad2 cerchio giu
+4.2   pad2 r1 giu
+4.3   pad2 r1 su
+4.5   pad2 r1 giu
+4.6   pad2 r1 su
+5.0   pad2 destra giu
+7.6   pad2 destra su
+8.0   pad2 cerchio su
+8.0   controlla REVERB = 99
+8.0   controlla ROOM = 4
+8.0   controlla TAIL = 99
+10.0  pad2 l2 giu
+12.6  pad2 l2 su
+12.7  pad2 l1 giu
+15.3  pad2 l1 su
+16.0  controlla VOLUME = 0
+16.0  controlla LAYERS = 0
+60.0  controlla livello > 0.002
+60.0  controlla livello < 0.3
+120.0  controlla livello > 0.002
+120.0  controlla livello < 0.3
+180.0  controlla livello > 0.002
+180.0  controlla livello < 0.3
+240.0  controlla livello > 0.002
+240.0  controlla livello < 0.3
+300.0  controlla livello > 0.002
+300.0  controlla livello < 0.3
+360.0  controlla livello > 0.002
+360.0  controlla livello < 0.3
+420.0  controlla livello > 0.002
+420.0  controlla livello < 0.3
+480.0  controlla livello > 0.002
+480.0  controlla livello < 0.3
+540.0  controlla livello > 0.002
+540.0  controlla livello < 0.3
+600.0  controlla livello > 0.002
+600.0  controlla livello < 0.3
+600.0 fine

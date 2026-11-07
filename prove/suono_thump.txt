@@ -1,0 +1,17 @@
+# THUMP da solo: via il drone (VOLUME 0) e gli strati (LAYERS 0), poi THUMP 99 (pad 1, Select + X
+# = TEXTURE, su). Per sentire durata e livello del colpo basso a ogni colpo di PULSE 1.
+# secondi  dispositivo  evento
+1.0   pad2 l2 giu
+3.6   pad2 l2 su
+3.7   pad2 l1 giu
+6.3   pad2 l1 su
+6.5   controlla VOLUME = 0
+6.5   controlla LAYERS = 0
+7.0   pad1 select giu
+7.1   pad1 croce giu
+7.3   pad1 su giu
+9.9   pad1 su su
+10.0  pad1 croce su
+10.1  pad1 select su
+10.1  controlla THUMP = 99
+20.0  fine

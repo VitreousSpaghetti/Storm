@@ -1,0 +1,50 @@
+# OSC: le forme di OSC A una alla volta (pad 1, X tenuto = pagina OSC), poi la FM di OSC B
+# (Select tenuto = pagina OSC B). Un tasto tenuto fa scorrere il valore: oltre 2 s si arriva in fondo.
+# secondi  dispositivo  evento
+0.0   controlla SINE = 70
+0.0   controlla SQUARE = 20
+3.0   controlla livello > 0.05
+# solo sinusoide (SQUARE e SUB a 0)
+3.0   pad1 croce giu
+3.2   pad1 sinistra giu
+5.8   pad1 sinistra su
+6.0   pad1 l2 giu
+8.6   pad1 l2 su
+9.0   controlla SQUARE = 0
+9.0   controlla SUB = 0
+11.0  controlla livello > 0.03
+# solo quadra
+11.0  pad1 giu giu
+13.6  pad1 giu su
+13.8  pad1 destra giu
+16.4  pad1 destra su
+17.0  controlla SINE = 0
+17.0  controlla SQUARE = 99
+19.0  controlla livello > 0.03
+# solo sega
+19.0  pad1 sinistra giu
+21.6  pad1 sinistra su
+21.8  pad1 r1 giu
+24.4  pad1 r1 su
+25.0  controlla SQUARE = 0
+25.0  controlla SAW = 99
+27.0  controlla livello > 0.03
+# sega + SUB pieno
+27.0  pad1 r2 giu
+29.6  pad1 r2 su
+30.0  pad1 croce su
+30.0  controlla SUB = 99
+32.0  controlla livello > 0.03
+# FM: OSC B sulla fase, sale piano fino in fondo, poi RATIO 7/2
+32.0  pad1 select giu
+32.2  pad1 su giu
+35.0  pad1 su su
+35.2  pad1 r1 giu
+35.3  pad1 r1 su
+35.5  pad1 r1 giu
+35.6  pad1 r1 su
+36.0  pad1 select su
+36.0  controlla FM = 99
+36.0  controlla RATIO = 5
+39.0  controlla livello > 0.03
+40.0  fine

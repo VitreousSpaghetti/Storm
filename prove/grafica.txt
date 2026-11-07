@@ -1,0 +1,60 @@
+# Grafica: foto della schermata a riposo, con una pagina tenuta (SPACE, pad 2 cerchio), della GUIDE,
+# del TUTORIAL e della VISUAL (tempesta), da confrontare con le foto della PS1.
+# secondi  dispositivo  evento
+0.0   controlla VOLUME = 80
+2.0   foto      riposo
+2.5   pad2      cerchio giu
+3.5   foto      pagina_space
+3.6   pad2      cerchio su
+# START + SELECT tenuti 1 s = GUIDE (prima voce: SIGNAL PATH)
+4.5   pad1      start giu
+4.5   pad1      select giu
+5.8   pad1      start su
+5.8   pad1      select su
+6.5   foto      guida
+# 5 volte SU: TUTORIAL; X = conferma, X = parte
+7.0   pad1      su giu
+7.1   pad1      su su
+7.3   pad1      su giu
+7.4   pad1      su su
+7.6   pad1      su giu
+7.7   pad1      su su
+7.9   pad1      su giu
+8.0   pad1      su su
+8.2   pad1      su giu
+8.3   pad1      su su
+8.6   pad1      croce giu
+8.7   pad1      croce su
+9.0   foto      guida_tutorial_conferma
+9.2   pad1      croce giu
+9.3   pad1      croce su
+10.5  foto      tutorial
+# GUIDE di nuovo, X sul TUTORIAL = lo chiude
+11.0  pad1      start giu
+11.0  pad1      select giu
+12.3  pad1      start su
+12.3  pad1      select su
+12.8  pad1      croce giu
+12.9  pad1      croce su
+# START + SELECT toccati = VISUAL (3 s di aiuto in basso, poi solo la tempesta)
+13.5  pad1      start giu
+13.5  pad1      select giu
+13.7  pad1      start su
+13.7  pad1      select su
+14.5  foto      visual_aiuto
+18.0  foto      visual
+# tempesta piu' forte: pioggia (NOISE: tieni QUADRATO, DESTRA), fulmini (FM: tieni SELECT, SU),
+# uragano (MACRO 1: pad 2 a riposo, SU)
+18.5  pad1      quadrato giu
+18.6  pad1      destra giu
+21.5  pad1      destra su
+21.6  pad1      quadrato su
+22.0  pad1      select giu
+22.1  pad1      su giu
+24.5  pad1      su su
+24.6  pad1      select su
+24.7  pad2      su giu
+27.0  pad2      su su
+27.5  foto      visual_tempesta
+28.0  controlla livello > 0.01
+28.0  fine

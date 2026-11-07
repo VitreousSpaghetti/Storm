@@ -1,0 +1,39 @@
+# Chiudi e riapri: parte col file lasciato da scene.txt (posti 2 e 5 pieni). All'avvio il suono e'
+# quello iniziale (le scene non si caricano da sole); program change 1 = scena 2, GO dal pad 2 =
+# scena 5. MORPH e' quello di adesso (10 s), non quello di scene.txt.
+# secondi  dispositivo  evento
+0.0   controlla CUTOFF = 45
+0.0   controlla MODE = 0
+0.0   controlla SINE = 70
+0.5   midi  programma 1
+0.6   controlla MODE = 1
+10.6  controlla CUTOFF = 55
+10.6  controlla SINE = 60
+10.6  controlla MODE = 1
+10.6  controlla MORPH = 2
+# EDIT (Shift + -): la quantita' del posto 1 della macro 1 e' quella salvata (+7)
+10.8  tasto shift giu
+10.8  tasto - giu
+10.9  tasto - su
+10.9  tasto shift su
+11.2  foto  riapri_edit
+11.3  tasto esc giu
+11.4  tasto esc su
+# Pad 2: Start tenuto = SCENE, Giu' x4 = posto 5, R1 = GO
+11.6  pad2 start giu
+12.0  pad2 giu giu
+12.1  pad2 giu su
+12.2  pad2 giu giu
+12.3  pad2 giu su
+12.4  pad2 giu giu
+12.5  pad2 giu su
+12.6  pad2 giu giu
+12.7  pad2 giu su
+12.8  pad2 r1 giu
+12.9  pad2 r1 su
+13.0  foto  riapri_scene
+13.1  pad2 start su
+23.0  controlla CUTOFF = 25
+23.0  controlla SINE = 60
+23.0  controlla MORPH = 2
+23.2  fine

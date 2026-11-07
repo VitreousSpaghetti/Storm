@@ -1,0 +1,28 @@
+# scene di storm (versione 1), scritto a mano con degli errori (prove/scene_file.txt)
+[scena 1]
+CUTOFF = 12
+SINE = 150            # fuori limiti: portato a 99
+RES = -5              # fuori limiti: portato a 0
+PIPPO = 3             # parametro sconosciuto: avviso
+MORPH = 4             # non sta nelle scene: avviso
+questa riga non vuol dire niente
+macro 1 1 = MODE 5    # MODE non e' una destinazione delle macro: avviso
+macro 1 2 = FOLD 20   # quantita' portata a 9
+macro 5 1 = CUTOFF 2  # c'e' solo la macro 1-4: avviso
+CUTOFF = 13           # di nuovo: vale l'ultimo
+# FOLD non c'e': resta al valore iniziale (25)
+
+[scena 3]
+# scena "vecchia": senza righe macro, quasi tutti i parametri mancano
+CUTOFF = 30
+
+[scena 9]
+CUTOFF = 1            # sezione fuori dai posti 1-8: avviso, si salta tutta
+SINE = 1
+[scena x]             # intestazione rotta: avviso, si salta tutta (anche le righe sotto)
+CUTOFF = 2
+
+[ scena 4 ]           # spazi dentro le parentesi: va bene
+CUTOFF = 40
+[scena 4] e poi altro # intestazione rotta dopo una buona: le sue righe non vanno nel posto 4
+CUTOFF = 3

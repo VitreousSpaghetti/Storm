@@ -1,0 +1,46 @@
+# FILTER (pagina SHAPE del pad 1, a riposo): CUTOFF giu' e su, RES al massimo con una spazzata,
+# MODE LP -> BP -> HP (R1), DRIVE al massimo (R2).
+# secondi  dispositivo  evento
+0.0   controlla CUTOFF = 45
+0.0   controlla RES = 30
+# cutoff chiuso, poi aperto
+2.0   pad1 giu giu
+4.6   pad1 giu su
+5.0   controlla CUTOFF = 0
+7.0   pad1 su giu
+9.6   pad1 su su
+10.0  controlla CUTOFF = 99
+11.0  controlla livello > 0.03
+# risonanza al massimo, poi spazzata lenta (un passo alla volta oltre i 12 fotogrammi: ~2 s)
+12.0  pad1 destra giu
+14.6  pad1 destra su
+15.0  controlla RES = 99
+15.0  pad1 giu giu
+17.6  pad1 giu su
+18.0  controlla CUTOFF = 0
+18.5  pad1 su giu
+19.6  pad1 su su
+20.0  controlla CUTOFF = 44
+21.8  controlla livello > 0.01
+# MODE: BP, poi HP (un passo a pressione)
+21.9  controlla MODE = 0
+22.0  pad1 r1 giu
+22.1  pad1 r1 su
+25.0  controlla MODE = 1
+25.0  pad1 r1 giu
+25.1  pad1 r1 su
+28.0  controlla MODE = 2
+28.0  controlla livello > 0.003
+# di nuovo LP, risonanza a meta', DRIVE al massimo
+28.0  pad1 l1 giu
+28.1  pad1 l1 su
+28.5  pad1 l1 giu
+28.6  pad1 l1 su
+29.0  controlla MODE = 0
+29.0  pad1 sinistra giu
+30.0  pad1 sinistra su
+30.2  pad1 r2 giu
+32.8  pad1 r2 su
+33.0  controlla DRIVE = 99
+35.0  controlla livello > 0.03
+36.0  fine

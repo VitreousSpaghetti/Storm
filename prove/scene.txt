@@ -1,0 +1,194 @@
+# Scene su file (standard/controlli/scene.md): salva sul posto 2 e sul posto 5, cambia tutto,
+# richiama il posto 2 con MORPH 2 s (valore a meta' e alla fine), HOME, AUTO con due posti pieni,
+# sovrascrittura con conferma. Il file lasciato lo riprende scene_riapri.txt (chiudi e riapri).
+# secondi  dispositivo  evento
+0.0   controlla CUTOFF = 45
+0.0   controlla MODE = 0
+# Lato 1 a riposo (SHAPE): Shift + W = CUTOFF +10, E = MODE (scelta: un passo)
+0.2   tasto shift giu
+0.3   tasto w giu
+0.4   tasto w su
+0.4   tasto shift su
+0.5   tasto e giu
+0.6   tasto e su
+# OSC (1, fissa): Shift + S = SINE -10; 0 = di nuovo a riposo
+0.7   tasto 1 giu
+0.8   tasto 1 su
+0.9   tasto shift giu
+1.0   tasto s giu
+1.1   tasto s su
+1.1   tasto shift su
+1.2   tasto 0 giu
+1.3   tasto 0 su
+# EDIT (Shift + -): D = quantita' del posto 1 della macro 1 +1 (6 -> 7); Shift + 0 = MIX
+1.4   tasto shift giu
+1.4   tasto - giu
+1.5   tasto - su
+1.5   tasto shift su
+1.6   tasto d giu
+1.7   tasto d su
+1.8   tasto shift giu
+1.8   tasto 0 giu
+1.9   tasto 0 su
+1.9   tasto shift su
+2.0   controlla CUTOFF = 55
+2.0   controlla SINE = 60
+2.0   controlla MODE = 1
+# Ctrl + S: GUIDE su SAVE SCENE; D = posto 2; Invio salva (posto vuoto: niente conferma)
+2.2   tasto ctrl giu
+2.2   tasto s giu
+2.3   tasto s su
+2.3   tasto ctrl su
+2.4   tasto d giu
+2.5   tasto d su
+2.6   tasto invio giu
+2.7   tasto invio su
+2.9   foto  scene_salvata
+2.9   controlla GUIDE = 1
+3.0   tasto esc giu
+3.1   tasto esc su
+# Secondo SAVE subito dopo, sul posto 5, con CUTOFF 35 (per AUTO)
+3.2   tasto 0 giu
+3.3   tasto 0 su
+3.4   tasto shift giu
+3.5   tasto s giu
+3.6   tasto s su
+3.7   tasto s giu
+3.8   tasto s su
+3.8   tasto shift su
+3.9   controlla CUTOFF = 35
+4.0   tasto ctrl giu
+4.0   tasto s giu
+4.1   tasto s su
+4.1   tasto ctrl su
+4.2   tasto d giu
+4.3   tasto d su
+4.4   tasto d giu
+4.5   tasto d su
+4.6   tasto d giu
+4.7   tasto d su
+4.8   tasto invio giu
+4.9   tasto invio su
+5.0   tasto esc giu
+5.1   tasto esc su
+# Cambia tutto: CUTOFF 95, MODE 2, SINE 80
+5.2   tasto shift giu
+5.3   tasto w giu
+5.4   tasto w su
+5.5   tasto w giu
+5.6   tasto w su
+5.7   tasto w giu
+5.8   tasto w su
+5.9   tasto w giu
+6.0   tasto w su
+6.1   tasto w giu
+6.2   tasto w su
+6.3   tasto w giu
+6.4   tasto w su
+6.4   tasto shift su
+6.5   tasto e giu
+6.6   tasto e su
+6.7   tasto 1 giu
+6.8   tasto 1 su
+6.9   tasto shift giu
+7.0   tasto w giu
+7.1   tasto w su
+7.2   tasto w giu
+7.3   tasto w su
+7.3   tasto shift su
+7.4   tasto 0 giu
+7.5   tasto 0 su
+7.6   controlla CUTOFF = 95
+7.6   controlla MODE = 2
+7.6   controlla SINE = 80
+# SCENE tenuta (Shift + 9): A A = MORPH 2 s, W W W = posto 2 (era il 5), E = GO
+7.8   tasto shift giu
+7.8   tasto 9 giu
+7.9   tasto shift su
+8.0   tasto a giu
+8.1   tasto a su
+8.2   tasto a giu
+8.3   tasto a su
+8.4   tasto w giu
+8.5   tasto w su
+8.6   tasto w giu
+8.7   tasto w su
+8.8   tasto w giu
+8.9   tasto w su
+8.9   controlla MORPH = 0
+9.0   tasto e giu
+9.1   tasto e su
+9.2   tasto 9 su
+# Le scelte e le macro subito, le manopole scivolano in 2 s (100 fotogrammi): GO nel fotogramma
+# delle 9,00 s, a meta' (fotogramma delle 9,98) CUTOFF 95 -> 75 e SINE 80 -> 70, uno dopo 74 e 69
+9.2   controlla MODE = 1
+9.99  controlla CUTOFF = 75
+9.99  controlla SINE = 70
+10.01 controlla CUTOFF = 74
+10.01 controlla SINE = 69
+11.2  controlla CUTOFF = 55
+11.2  controlla SINE = 60
+11.2  controlla MORPH = 0
+11.2  foto  scene_richiamata
+# HOME: CUTOFF a 65 (0 = di nuovo il lato 1), poi L1 (Q) sulla SCENE tenuta: torna alla scena richiamata
+11.3  tasto 0 giu
+11.35 tasto 0 su
+11.4  tasto shift giu
+11.4  tasto w giu
+11.5  tasto w su
+11.5  tasto shift su
+11.6  controlla CUTOFF = 65
+11.8  tasto shift giu
+11.8  tasto 9 giu
+11.9  tasto shift su
+12.0  tasto q giu
+12.1  tasto q su
+12.2  tasto 9 su
+14.4  controlla CUTOFF = 55
+# AUTO (F sulla SCENE tenuta): subito il posto pieno dopo (5), poi ogni 4 s di nuovo il 2
+14.6  tasto shift giu
+14.6  tasto 9 giu
+14.7  tasto shift su
+14.8  tasto f giu
+14.9  tasto f su
+15.0  tasto 9 su
+17.0  controlla CUTOFF = 35
+17.0  foto  scene_auto
+21.0  controlla CUTOFF = 55
+21.2  tasto shift giu
+21.2  tasto 9 giu
+21.3  tasto shift su
+21.4  tasto f giu
+21.5  tasto f su
+21.6  tasto 9 su
+# Sovrascrittura del posto 5 con CUTOFF 25: il primo Invio chiede conferma, il secondo salva
+21.8  tasto 0 giu
+21.9  tasto 0 su
+22.0  tasto shift giu
+22.1  tasto s giu
+22.2  tasto s su
+22.3  tasto s giu
+22.4  tasto s su
+22.5  tasto s giu
+22.6  tasto s su
+22.6  tasto shift su
+22.7  controlla CUTOFF = 25
+22.8  tasto ctrl giu
+22.8  tasto s giu
+22.9  tasto s su
+22.9  tasto ctrl su
+23.0  tasto d giu
+23.1  tasto d su
+23.2  tasto d giu
+23.3  tasto d su
+23.4  tasto d giu
+23.5  tasto d su
+23.6  tasto invio giu
+23.7  tasto invio su
+23.9  foto  scene_sovrascrivi
+24.0  tasto invio giu
+24.1  tasto invio su
+24.3  foto  scene_sovrascritta
+24.4  tasto esc giu
+24.5  tasto esc su
+25.0  fine

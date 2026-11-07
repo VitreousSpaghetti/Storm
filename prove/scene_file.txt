@@ -1,0 +1,46 @@
+# File delle scene scritto a mano (prove/scene_file.scene): righe sbagliate, id sconosciuti, valori
+# fuori limiti, id mancanti, una scena senza righe macro. Il programma va avanti (uscita 0), con un
+# avviso "file:riga" per ogni riga saltata; i valori fuori sono portati dentro, i mancanti iniziali.
+# secondi  dispositivo  evento
+0.0   controlla CUTOFF = 45
+# MORPH 2 s (A A sulla SCENE tenuta)
+0.2   tasto shift giu
+0.2   tasto 9 giu
+0.3   tasto shift su
+0.4   tasto a giu
+0.5   tasto a su
+0.6   tasto a giu
+0.7   tasto a su
+0.8   tasto 9 su
+0.9   controlla MORPH = 0
+# Scena 2 vuota: niente cambia
+1.0   midi  programma 1
+3.2   controlla CUTOFF = 45
+# Scena 1
+3.4   midi  programma 0
+5.6   controlla CUTOFF = 13
+5.6   controlla SINE = 99
+5.6   controlla RES = 0
+5.6   controlla FOLD = 25
+5.6   controlla MORPH = 0
+# EDIT: macro 1 posto 1 resta CUTOFF +6, posto 2 = FOLD +9
+5.8   tasto shift giu
+5.8   tasto - giu
+5.9   tasto - su
+5.9   tasto shift su
+6.1   tasto s giu
+6.2   tasto s su
+6.4   foto  file_edit
+6.5   tasto esc giu
+6.6   tasto esc su
+# Scena 3 (senza macro): CUTOFF 30, il resto iniziale
+6.8   midi  programma 2
+9.0   controlla CUTOFF = 30
+9.0   controlla SINE = 70
+9.0   controlla RES = 30
+9.0   controlla FOLD = 25
+# Scena 4 ([ scena 4 ] con gli spazi): CUTOFF 40, non il 3 della sezione rotta sotto
+9.2   midi  programma 3
+11.4  controlla CUTOFF = 40
+11.4  controlla SINE = 70
+11.6  fine

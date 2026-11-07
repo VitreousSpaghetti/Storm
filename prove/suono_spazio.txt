@@ -1,0 +1,54 @@
+# SPACE: REVERB al massimo (MIX, pad 2), WIDE oltre 50 (fase invertita), le 5 stanze, DAMP,
+# poi TAIL 99 = HOLD: si toglie tutto il suono in ingresso e la coda deve restare.
+# secondi  dispositivo  evento
+0.0   controlla ROOM = 2
+1.0   pad2 destra giu
+3.6   pad2 destra su
+4.0   controlla REVERB = 99
+4.0   pad2 cerchio giu
+4.2   pad2 su giu
+6.8   pad2 su su
+7.0   controlla WIDE = 99
+# ROOM: HALL -> ECHO -> SPACE -> STUDIO -> SMALL -> HALL
+8.0   pad2 r1 giu
+8.1   pad2 r1 su
+11.0  pad2 r1 giu
+11.1  pad2 r1 su
+13.9  controlla ROOM = 4
+14.0  pad2 l1 giu
+14.1  pad2 l1 su
+14.2  pad2 l1 giu
+14.3  pad2 l1 su
+14.4  pad2 l1 giu
+14.5  pad2 l1 su
+17.0  pad2 l1 giu
+17.1  pad2 l1 su
+19.9  controlla ROOM = 0
+20.0  pad2 r1 giu
+20.1  pad2 r1 su
+20.2  pad2 r1 giu
+20.3  pad2 r1 su
+22.0  controlla ROOM = 2
+22.0  pad2 r2 giu
+24.6  pad2 r2 su
+25.0  controlla DAMP = 99
+# HOLD
+25.0  pad2 destra giu
+27.6  pad2 destra su
+28.0  pad2 cerchio su
+28.0  controlla TAIL = 99
+28.5  pad2 l2 giu
+31.1  pad2 l2 su
+31.2  pad2 l1 giu
+33.8  pad2 l1 su
+34.0  controlla VOLUME = 0
+34.0  controlla LAYERS = 0
+36.0  controlla livello > 0.003
+45.0  controlla livello > 0.003
+# fine dell'HOLD: TAIL 98, la coda si spegne
+45.0  pad2 cerchio giu
+45.2  pad2 sinistra giu
+45.3  pad2 sinistra su
+45.5  pad2 cerchio su
+45.5  controlla TAIL = 98
+52.0  fine

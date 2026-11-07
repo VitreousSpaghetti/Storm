@@ -1,0 +1,19 @@
+# WIND da solo: via il drone (VOLUME 0) e gli strati (LAYERS 0), poi WIND 99 (pad 1, Select + X =
+# TEXTURE, destra). Il rumore della SPU con raffiche e fischio, per 2 minuti: le raffiche partono
+# ferme e cominciano a muovere il fischio (il clock del rumore) solo dopo ~48 s.
+# secondi  dispositivo  evento
+1.0   pad2 l2 giu
+3.6   pad2 l2 su
+3.7   pad2 l1 giu
+6.3   pad2 l1 su
+6.5   controlla VOLUME = 0
+6.5   controlla LAYERS = 0
+7.0   pad1 select giu
+7.1   pad1 croce giu
+7.3   pad1 destra giu
+9.9   pad1 destra su
+10.0  pad1 croce su
+10.1  pad1 select su
+10.1  controlla WIND = 99
+60.0  controlla livello > 0.01
+120.0 fine

@@ -1,0 +1,521 @@
+# TUTORIAL e testi per dispositivo (standard/controlli/azioni.md, Aiuto a schermo): GUIDE e TUTORIAL
+# parlano del dispositivo usato per ultimo; AVANTI / INDIETRO con PagGiu'/PagSu', coi pulsanti < >
+# del mouse (sotto il numero del passo) e con una nota della zona comandi (prove/tutorial.mappa);
+# poi il TUTORIAL tutto col solo mouse fino alla fine. Coordinate come in prove/mouse.txt; pagine in
+# basso: OSC 96,174 GRAIN 133,174 LAYERS 61,188 OSC B 109,188 MIX 48,202 MOD A 85,202 MOD B 131,202
+# MOD C 177,202 SPACE 223,202 MACROS 62,216 SEQ 107,216 EDIT 281,216; < 23,34  > 40,34; PLAY 146,7.
+# secondi  dispositivo  evento
+0.00  controlla dispositivo = PAD
+0.00  controlla passo = 0
+# Tastiera: F1, Giu' = KEYS (testo della tastiera), poi TUTORIAL (Giu' x10), Invio, Invio
+0.20  tasto f1 giu
+0.30  tasto f1 su
+0.40  tasto giu giu
+0.50  tasto giu su
+0.80  controlla dispositivo = TASTIERA
+0.80  foto  guida_tastiera
+1.00  tasto giu giu
+1.05  tasto giu su
+1.10  tasto giu giu
+1.15  tasto giu su
+1.20  tasto giu giu
+1.25  tasto giu su
+1.30  tasto giu giu
+1.35  tasto giu su
+1.40  tasto giu giu
+1.45  tasto giu su
+1.50  tasto giu giu
+1.55  tasto giu su
+1.60  tasto giu giu
+1.65  tasto giu su
+1.70  tasto giu giu
+1.75  tasto giu su
+1.80  tasto giu giu
+1.85  tasto giu su
+1.90  tasto giu giu
+1.95  tasto giu su
+2.00  tasto invio giu
+2.05  tasto invio su
+2.20  foto  guida_tutorial_tastiera
+2.30  tasto invio giu
+2.35  tasto invio su
+2.60  controlla GUIDE = 0
+2.60  controlla passo = 1
+# PagGiu' fino al passo 23, PagSu' fino al passo 1 (e oltre: resta 1)
+2.70  tasto paggiu giu
+2.73  tasto paggiu su
+2.76  tasto paggiu giu
+2.79  tasto paggiu su
+2.82  tasto paggiu giu
+2.85  tasto paggiu su
+2.88  tasto paggiu giu
+2.91  tasto paggiu su
+2.94  tasto paggiu giu
+2.97  tasto paggiu su
+3.00  tasto paggiu giu
+3.03  tasto paggiu su
+3.06  tasto paggiu giu
+3.09  tasto paggiu su
+3.12  tasto paggiu giu
+3.15  tasto paggiu su
+3.18  tasto paggiu giu
+3.21  tasto paggiu su
+3.24  tasto paggiu giu
+3.27  tasto paggiu su
+3.30  tasto paggiu giu
+3.33  tasto paggiu su
+3.36  tasto paggiu giu
+3.39  tasto paggiu su
+3.42  tasto paggiu giu
+3.45  tasto paggiu su
+3.48  tasto paggiu giu
+3.51  tasto paggiu su
+3.54  tasto paggiu giu
+3.57  tasto paggiu su
+3.60  tasto paggiu giu
+3.63  tasto paggiu su
+3.66  tasto paggiu giu
+3.69  tasto paggiu su
+3.72  tasto paggiu giu
+3.75  tasto paggiu su
+3.78  tasto paggiu giu
+3.81  tasto paggiu su
+3.84  tasto paggiu giu
+3.87  tasto paggiu su
+3.90  tasto paggiu giu
+3.93  tasto paggiu su
+3.96  tasto paggiu giu
+3.99  tasto paggiu su
+4.12  controlla passo = 23
+4.22  tasto pagsu giu
+4.25  tasto pagsu su
+4.28  tasto pagsu giu
+4.31  tasto pagsu su
+4.34  tasto pagsu giu
+4.37  tasto pagsu su
+4.40  tasto pagsu giu
+4.43  tasto pagsu su
+4.46  tasto pagsu giu
+4.49  tasto pagsu su
+4.52  tasto pagsu giu
+4.55  tasto pagsu su
+4.58  tasto pagsu giu
+4.61  tasto pagsu su
+4.64  tasto pagsu giu
+4.67  tasto pagsu su
+4.70  tasto pagsu giu
+4.73  tasto pagsu su
+4.76  tasto pagsu giu
+4.79  tasto pagsu su
+4.82  tasto pagsu giu
+4.85  tasto pagsu su
+4.88  tasto pagsu giu
+4.91  tasto pagsu su
+4.94  tasto pagsu giu
+4.97  tasto pagsu su
+5.00  tasto pagsu giu
+5.03  tasto pagsu su
+5.06  tasto pagsu giu
+5.09  tasto pagsu su
+5.12  tasto pagsu giu
+5.15  tasto pagsu su
+5.18  tasto pagsu giu
+5.21  tasto pagsu su
+5.24  tasto pagsu giu
+5.27  tasto pagsu su
+5.30  tasto pagsu giu
+5.33  tasto pagsu su
+5.36  tasto pagsu giu
+5.39  tasto pagsu su
+5.42  tasto pagsu giu
+5.45  tasto pagsu su
+5.48  tasto pagsu giu
+5.51  tasto pagsu su
+5.54  tasto pagsu giu
+5.57  tasto pagsu su
+5.70  controlla passo = 1
+5.80  tasto paggiu giu
+5.83  tasto paggiu su
+6.00  controlla passo = 2
+6.00  foto  passo2_tastiera
+# Pad: Start + Select tenuti 1 s = GUIDE; Su x10 = KEYS (testo del pad); Triangolo chiude
+6.20  pad1 start giu
+6.20  pad1 select giu
+7.40  pad1 select su
+7.40  pad1 start su
+7.60  controlla GUIDE = 1
+7.60  controlla dispositivo = PAD
+7.60  pad1 su giu
+7.65  pad1 su su
+7.70  pad1 su giu
+7.75  pad1 su su
+7.80  pad1 su giu
+7.85  pad1 su su
+7.90  pad1 su giu
+7.95  pad1 su su
+8.00  pad1 su giu
+8.05  pad1 su su
+8.10  pad1 su giu
+8.15  pad1 su su
+8.20  pad1 su giu
+8.25  pad1 su su
+8.30  pad1 su giu
+8.35  pad1 su su
+8.40  pad1 su giu
+8.45  pad1 su su
+8.50  pad1 su giu
+8.55  pad1 su su
+8.70  foto  guida_pad
+8.80  pad1 triangolo giu
+8.85  pad1 triangolo su
+9.00  controlla GUIDE = 0
+9.00  foto  passo2_pad
+# MIDI: un CC (M3 UNREST a 0, come gia' era); il mouse dopo non toglie il MIDI
+9.20  midi cc 1 0
+9.40  controlla dispositivo = MIDI
+9.40  controlla M3UNREST = 0
+9.40  foto  passo2_midi
+9.50  mouse muovi 160 128
+9.60  mouse giu 240 7
+9.65  mouse su
+9.90  controlla GUIDE = 1
+9.90  controlla dispositivo = MIDI
+9.90  mouse giu 60 58
+9.95  mouse su
+10.20 foto  guida_midi
+# Mouse: dopo un tasto, il clic e' del mouse
+10.30 tasto shift giu
+10.35 tasto shift su
+10.40 controlla dispositivo = TASTIERA
+10.40 mouse giu 60 58
+10.45 mouse su
+10.70 controlla dispositivo = MOUSE
+10.70 foto  guida_mouse
+10.80 mouse giu 70 248
+10.85 mouse su
+11.10 controlla GUIDE = 0
+11.10 mouse muovi 160 128
+11.20 foto  passo2_mouse
+# Zona comandi (prove/tutorial.mappa): nota 37 = AVANTI, 36 = INDIETRO
+11.30 midi nota 37 100
+11.40 midi nota 37 0
+11.50 controlla passo = 3
+11.50 controlla dispositivo = MIDI
+11.50 midi nota 36 100
+11.60 midi nota 36 0
+11.70 controlla passo = 2
+# Mouse: > e <
+11.70 tasto shift giu
+11.75 tasto shift su
+11.80 mouse giu 40 34
+11.85 mouse su
+12.00 controlla passo = 3
+12.00 foto  frecce_mouse
+12.00 mouse giu 23 34
+12.05 mouse su
+12.20 mouse giu 23 34
+12.25 mouse su
+12.40 controlla passo = 1
+# Col solo mouse: TUTORIAL chiuso e riaperto dalla GUIDE (TUTORIAL, OK = esci; di nuovo: conferma, OK)
+12.40 mouse giu 240 7
+12.45 mouse su
+12.70 mouse giu 60 182
+12.75 mouse su
+13.00 mouse giu 60 182
+13.05 mouse su
+13.30 controlla passo = 0
+13.30 controlla GUIDE = 0
+13.30 mouse giu 240 7
+13.35 mouse su
+13.60 mouse giu 60 182
+13.65 mouse su
+13.90 foto  guida_tutorial_mouse
+13.90 mouse giu 60 182
+13.95 mouse su
+14.20 controlla passo = 1
+14.20 controlla SQUARE = 0
+14.20 mouse giu 40 34
+14.25 mouse su
+14.50 controlla passo = 2
+# passo 2
+14.60 mouse giu 8 120
+14.65 mouse su
+14.80 mouse giu 49 81
+14.85 mouse su
+15.30 mouse giu 250 103
+15.40 mouse muovi 250 72
+15.50 mouse su
+15.60 controlla SQUARE = 31
+15.60 foto  passo2_fatto_mouse
+18.90 controlla passo = 3
+# passo 3
+19.70 mouse giu 250 148
+19.80 mouse muovi 250 107
+19.90 mouse su
+20.00 controlla SUB = 41
+23.30 controlla passo = 4
+# passo 4
+23.40 mouse giu 8 120
+23.45 mouse su
+23.60 mouse giu 133 174
+23.65 mouse su
+24.10 mouse giu 250 80
+24.20 mouse muovi 250 39
+24.30 mouse su
+24.40 controlla FOLD = 41
+27.70 controlla passo = 5
+# passo 5
+27.80 mouse giu 8 120
+27.85 mouse su
+28.00 mouse giu 109 188
+28.05 mouse su
+28.50 mouse giu 250 80
+28.60 mouse muovi 250 49
+28.70 mouse su
+28.80 controlla FM = 31
+32.10 controlla passo = 6
+# passo 6
+32.20 mouse giu 8 120
+32.25 mouse su
+32.40 mouse giu 57 174
+32.45 mouse su
+32.90 mouse giu 250 80
+33.00 mouse muovi 250 120
+33.10 mouse su
+33.20 controlla CUTOFF = 59
+36.50 controlla passo = 7
+# passo 7
+37.30 mouse giu 250 103
+37.40 mouse muovi 250 52
+37.50 mouse su
+37.60 controlla RES = 51
+40.90 controlla passo = 8
+# passo 8
+41.00 mouse giu 8 120
+41.05 mouse su
+41.20 mouse giu 85 202
+41.25 mouse su
+41.70 mouse giu 250 103
+41.80 mouse muovi 250 62
+41.90 mouse su
+42.00 controlla DEPTH_A = 41
+45.30 controlla passo = 9
+# passo 9
+45.40 mouse giu 8 120
+45.45 mouse su
+45.60 mouse giu 131 202
+45.65 mouse su
+46.10 mouse giu 250 103
+46.20 mouse muovi 250 72
+46.30 mouse su
+46.40 controlla DEPTH_B = 31
+49.70 controlla passo = 10
+# passo 10
+49.80 mouse giu 8 120
+49.85 mouse su
+50.00 mouse giu 177 202
+50.05 mouse su
+50.50 mouse rotella 250 148 -2
+50.55 mouse giu 250 103
+50.60 mouse muovi 250 72
+50.65 mouse su
+50.80 controlla DEST_C = 9
+50.80 controlla DEPTH_C = 31
+54.10 controlla passo = 11
+# passo 11
+54.20 mouse giu 8 120
+54.25 mouse su
+54.40 mouse giu 48 202
+54.45 mouse su
+54.90 mouse giu 250 126
+55.00 mouse muovi 250 75
+55.10 mouse su
+55.20 controlla LAYERS = 51
+58.50 controlla passo = 12
+# passo 12
+58.60 mouse giu 8 120
+58.65 mouse su
+58.80 mouse giu 61 188
+58.85 mouse su
+59.30 mouse giu 250 80
+59.40 mouse muovi 250 39
+59.50 mouse su
+59.60 controlla DETUNE = 41
+62.90 controlla passo = 13
+# passo 13
+63.70 mouse giu 250 103
+63.80 mouse muovi 250 72
+63.90 mouse su
+64.00 controlla BELLS = 31
+67.30 controlla passo = 14
+# passo 14
+67.40 mouse giu 8 120
+67.45 mouse su
+67.60 mouse giu 48 202
+67.65 mouse su
+68.10 mouse giu 250 103
+68.20 mouse muovi 250 57
+68.30 mouse su
+68.40 controlla REVERB = 61
+71.70 controlla passo = 15
+# passo 15
+71.80 mouse giu 8 120
+71.85 mouse su
+72.00 mouse giu 223 202
+72.05 mouse su
+72.50 mouse giu 250 80
+72.60 mouse muovi 250 19
+72.70 mouse su
+72.80 controlla WIDE = 61
+76.10 controlla passo = 16
+# passo 16
+76.90 mouse giu 250 148
+77.00 mouse muovi 250 87
+77.10 mouse su
+77.20 controlla DAMP = 61
+80.50 controlla passo = 17
+# passo 17
+80.60 mouse giu 8 120
+80.65 mouse su
+80.80 mouse giu 48 202
+80.85 mouse su
+81.30 mouse giu 250 80
+81.40 mouse muovi 250 30
+81.50 mouse su
+81.60 controlla M1RISE = 50
+84.90 controlla passo = 18
+# passo 18
+85.00 mouse giu 8 120
+85.05 mouse su
+85.20 mouse giu 62 216
+85.25 mouse su
+85.70 mouse giu 250 103
+85.80 mouse muovi 250 52
+85.90 mouse su
+86.00 controlla M2DEEP = 51
+89.30 controlla passo = 19
+# passo 19
+89.40 mouse giu 8 120
+89.45 mouse su
+89.60 mouse giu 281 216
+89.65 mouse su
+90.10 mouse giu 290 80
+90.20 mouse muovi 290 87
+90.30 mouse su
+93.70 controlla passo = 20
+# passo 20
+93.80 mouse giu 8 120
+93.85 mouse su
+94.00 mouse giu 107 216
+94.05 mouse su
+94.50 mouse rotella 250 80 4
+94.80 controlla STEPS = 4
+98.10 controlla passo = 21
+# passo 21
+98.20 mouse giu 8 120
+98.25 mouse su
+98.40 mouse giu 85 202
+98.45 mouse su
+98.90 mouse rotella 250 126 5
+99.20 controlla WAVE_A = 5
+102.50controlla passo = 22
+# passo 22: clic fuori (chiude LAYERS), PLAY in cima, tenuto in alto su un tasto della striscia = SWELL
+102.60mouse giu 8 120
+102.65mouse su
+102.80mouse giu 146 7
+102.85mouse su
+103.10controlla PLAY = 1
+103.20mouse giu 75 174
+104.20foto  passo22_mouse
+104.40mouse su
+107.50controlla passo = 23
+107.60mouse giu 40 34
+107.65mouse su
+107.90controlla passo = 0
+# Tastiera alla lettera, passi 2-4: TUTORIAL riaperto (riparte dalla sinusoide), poi solo i tasti
+# che dice il testo (passo 3: OSC e' ancora aperta, 1 non si ritocca)
+108.10  tasto f1 giu
+108.18  tasto f1 su
+108.40  controlla GUIDE = 1
+108.40  tasto invio giu
+108.48  tasto invio su
+108.70  tasto invio giu
+108.78  tasto invio su
+109.00  controlla passo = 1
+109.00  controlla dispositivo = TASTIERA
+109.00  controlla SQUARE = 0
+109.00  tasto paggiu giu
+109.08  tasto paggiu su
+109.30  controlla passo = 2
+# passo 2: PRESS 1 (OSC), THEN RAISE SQUARE WITH D
+109.30  tasto 1 giu
+109.38  tasto 1 su
+109.50  tasto shift giu
+109.52  tasto d giu
+109.60  tasto d su
+109.62  tasto shift su
+109.67  tasto shift giu
+109.69  tasto d giu
+109.77  tasto d su
+109.79  tasto shift su
+109.84  tasto shift giu
+109.86  tasto d giu
+109.94  tasto d su
+109.96  tasto shift su
+110.01  tasto shift giu
+110.03  tasto d giu
+110.11  tasto d su
+110.13  tasto shift su
+110.18  controlla SQUARE = 40
+113.58  controlla passo = 3
+113.58  foto  passo3_tastiera
+# passo 3: STILL ON OSC: RAISE SUB WITH R
+113.58  tasto shift giu
+113.60  tasto r giu
+113.68  tasto r su
+113.70  tasto shift su
+113.75  tasto shift giu
+113.77  tasto r giu
+113.85  tasto r su
+113.87  tasto shift su
+113.92  tasto shift giu
+113.94  tasto r giu
+114.02  tasto r su
+114.04  tasto shift su
+114.09  tasto shift giu
+114.11  tasto r giu
+114.19  tasto r su
+114.21  tasto shift su
+114.26  tasto shift giu
+114.28  tasto r giu
+114.36  tasto r su
+114.38  tasto shift su
+114.43  controlla SUB = 50
+117.83  controlla passo = 4
+# passo 4: PRESS 2 (GRAIN), THEN RAISE FOLD WITH W
+117.83  tasto 2 giu
+117.91  tasto 2 su
+118.03  tasto shift giu
+118.05  tasto w giu
+118.13  tasto w su
+118.15  tasto shift su
+118.20  tasto shift giu
+118.22  tasto w giu
+118.30  tasto w su
+118.32  tasto shift su
+118.37  tasto shift giu
+118.39  tasto w giu
+118.47  tasto w su
+118.49  tasto shift su
+118.54  tasto shift giu
+118.56  tasto w giu
+118.64  tasto w su
+118.66  tasto shift su
+118.71  tasto shift giu
+118.73  tasto w giu
+118.81  tasto w su
+118.83  tasto shift su
+118.88  controlla FOLD = 50
+122.28  controlla passo = 5
+122.28  controlla dispositivo = TASTIERA
+122.28  fine

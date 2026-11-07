@@ -1,0 +1,52 @@
+# SEQ: sequencer di note generativo (pad 2, Select + X). 4 passi, uno a battito, MUTATE al massimo;
+# poi scala PENTA, RANGE 2 OCT, BPM piu' alto; alla fine MUTATE 0: la frase si ripete.
+# secondi  dispositivo  evento
+0.0   controlla STEPS = 0
+2.0   pad2 select giu
+2.1   pad2 croce giu
+2.3   pad2   su giu
+2.4   pad2   su su
+2.5   pad2   su giu
+2.6   pad2   su su
+2.7   pad2   su giu
+2.8   pad2   su su
+2.9   pad2   l2 giu
+3.0   pad2   l2 su
+3.1   pad2   l2 giu
+3.2   pad2   l2 su
+3.3   pad2 destra giu
+5.9   pad2 destra su
+6.0   pad2 croce su
+6.1   pad2 select su
+6.1   controlla STEPS = 3
+6.1   controlla EVERY = 0
+6.1   controlla MUTATE = 99
+14.0  controlla livello > 0.03
+# scala PENTA, RANGE 2 OCT, BPM 119
+16.0  pad2 select giu
+16.1  pad2 croce giu
+16.3  pad2   r1 giu
+16.4  pad2   r1 su
+16.5  pad2   r1 giu
+16.6  pad2   r1 su
+16.8  pad2 croce su
+17.0  pad2 triangolo giu
+17.2  pad2 destra giu
+17.3  pad2 destra su
+17.5  pad2 su giu
+18.5  pad2 su su
+18.7  pad2 triangolo su
+18.8  pad2 select su
+18.8  controlla SCALE = 2
+18.8  controlla RANGE = 1
+18.8  controlla BPM = 79
+# MUTATE a 0: il registro non cambia piu', la frase gira uguale
+30.0  pad2 select giu
+30.1  pad2 croce giu
+30.3  pad2 sinistra giu
+32.9  pad2 sinistra su
+33.0  pad2 croce su
+33.1  pad2 select su
+33.1  controlla MUTATE = 0
+40.0  controlla livello > 0.03
+42.0  fine

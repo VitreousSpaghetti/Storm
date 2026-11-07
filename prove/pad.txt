@@ -1,0 +1,241 @@
+# Gamepad (standard/gamepad/gamepad.md) con la grammatica dei pad PS1: prima un gamepad solo
+# (pad1, tasto Guide = cambia lato), poi due (pad2 si collega al suo primo evento: controller 2).
+# Tieni = pagina temporanea, doppio tocco = fissa, frecce e dorsali = 4 manopole (L2/R2 sono i
+# grilletti), levette, combinazioni con Start e Select, LOCK; pagina aperta e stato degli interruttori.
+# secondi  dispositivo  evento
+0.0   controlla SINE = 70
+# Croce tenuta = OSC: Su alza SINE
+0.5   pad1 croce giu
+0.6   pad1 su giu
+0.65  controlla pagina 1 = OSC
+0.7   pad1 su su
+0.8   pad1 croce su
+0.9   controlla SINE = 71
+0.9   controlla pagina 1 = SHAPE
+# Quadrato toccato due volte = GRAIN fissa; Su alza FOLD; un altro tocco la chiude
+1.0   pad1 quadrato giu
+1.05  pad1 quadrato su
+1.15  pad1 quadrato giu
+1.2   pad1 quadrato su
+1.4   pad1 su giu
+1.5   pad1 su su
+1.6   controlla FOLD = 26
+1.6   controlla pagina 1 = GRAIN
+1.6   foto  pad_grain_fissa
+1.7   pad1 quadrato giu
+1.8   pad1 quadrato su
+2.0   pad1 su giu
+2.1   pad1 su su
+2.2   controlla FOLD = 26
+2.2   controlla CUTOFF = 46
+2.2   controlla pagina 1 = SHAPE
+# Triangolo = NOTE (ROOT, scelta), Cerchio = LAYERS (R1/L1 = CHORD)
+2.4   pad1 triangolo giu
+2.5   pad1 su giu
+2.55  controlla pagina 1 = NOTE
+2.6   pad1 su su
+2.7   pad1 triangolo su
+2.8   controlla ROOT = 1
+2.8   pad1 triangolo giu
+2.9   pad1 giu giu
+3.0   pad1 giu su
+3.1   pad1 triangolo su
+3.2   controlla ROOT = 0
+3.2   pad1 cerchio giu
+3.3   pad1 r1 giu
+3.35  controlla pagina 1 = LAYERS
+3.4   pad1 r1 su
+3.5   pad1 cerchio su
+3.6   controlla CHORD = 2
+# Select tenuto = OSC B (non diventa PLAY: si e' premuto altro); Select + Croce = TEXTURE
+3.8   pad1 select giu
+3.9   pad1 su giu
+3.95  controlla pagina 1 = OSC B
+4.0   pad1 su su
+4.1   pad1 select su
+4.2   controlla FM = 16
+4.4   pad1 select giu
+4.5   pad1 croce giu
+4.6   pad1 destra giu
+4.7   pad1 destra su
+4.72  controlla pagina 1 = TEXTURE
+4.75  foto  pad_texture
+4.8   pad1 croce su
+4.9   pad1 select su
+5.0   controlla WIND = 1
+# Grilletti: R2 / L2 a riposo = DRIVE
+5.2   pad1 r2 giu
+5.3   pad1 r2 su
+5.4   controlla DRIVE = 21
+5.4   pad1 l2 giu
+5.5   pad1 l2 su
+5.6   controlla DRIVE = 20
+# Tenuto: scorre (stesso conto della tastiera)
+6.0   pad1 su giu
+7.0   pad1 su su
+7.1   controlla CUTOFF = 85
+# Levetta sinistra: nella zona morta (10%) niente; giu' a meta' per 0,2 s = CUTOFF giu' di 23
+7.2   pad1 leva sx 0.1 -0.1
+7.6   controlla CUTOFF = 85
+7.6   controlla FOLD = 26
+7.6   pad1 leva sx 0 0.5
+7.8   pad1 leva sx 0 0
+7.9   controlla CUTOFF = 62
+# Guide (un gamepad solo): il pad passa al lato 2 (testata C2): Su alza M1 RISE, Croce = MOD A
+8.0   pad1 guide giu
+8.1   pad1 guide su
+8.2   pad1 su giu
+8.3   pad1 su su
+8.4   controlla M1RISE = 1
+8.4   controlla pagina 2 = MIX
+8.4   pad1 croce giu
+8.5   pad1 su giu
+8.6   pad1 su su
+8.65  controlla pagina 2 = MOD A
+8.65  foto  pad_solo_lato2
+8.7   pad1 croce su
+8.8   controlla RATE_A = 21
+8.8   pad1 giu giu
+8.9   pad1 giu su
+9.0   controlla M1RISE = 0
+9.0   pad1 guide giu
+9.1   pad1 guide su
+9.2   pad1 su giu
+9.3   pad1 su su
+9.4   controlla CUTOFF = 63
+# Select toccato = PLAY (Su = SWELL, CUTOFF fermo), di nuovo = spento
+9.6   pad1 select giu
+9.7   pad1 select su
+9.8   pad1 su giu
+10.3  pad1 su su
+10.4  controlla CUTOFF = 63
+10.4  controlla PLAY = 1
+10.4  pad1 select giu
+10.5  pad1 select su
+10.6  controlla PLAY = 0
+# Start toccato = MUTE
+10.6  pad1 start giu
+10.7  pad1 start su
+15.5  controlla livello < 0.001
+15.5  controlla MUTE = 1
+15.6  pad1 start giu
+15.7  pad1 start su
+15.8  controlla MUTE = 0
+# Start + Select toccati = VISUAL; tenuti 1 s = GUIDE (Triangolo chiude)
+15.8  pad1 start giu
+15.8  pad1 select giu
+15.9  pad1 start su
+15.9  pad1 select su
+16.5  foto  pad_visual
+16.5  controlla VISUAL = 1
+16.6  pad1 start giu
+16.6  pad1 select giu
+16.7  pad1 start su
+16.7  pad1 select su
+16.8  controlla VISUAL = 0
+16.8  pad1 start giu
+16.8  pad1 select giu
+18.0  pad1 start su
+18.0  pad1 select su
+18.2  foto  pad_guida
+18.2  controlla GUIDE = 1
+18.3  pad1 triangolo giu
+18.4  pad1 triangolo su
+18.5  controlla GUIDE = 0
+# LOCK: Start + Croce 2 s; bloccato Su non fa niente; ancora 2 s = sblocca
+18.6  pad1 start giu
+18.6  pad1 croce giu
+20.8  pad1 croce su
+20.8  pad1 start su
+21.0  pad1 su giu
+21.1  pad1 su su
+21.2  controlla CUTOFF = 63
+21.2  controlla LOCK = 1
+21.2  foto  pad_lock
+21.4  pad1 start giu
+21.4  pad1 croce giu
+23.6  pad1 croce su
+23.6  pad1 start su
+23.8  pad1 su giu
+23.9  pad1 su su
+24.0  controlla CUTOFF = 64
+24.0  controlla LOCK = 0
+# Due gamepad: pad2 = controller 2 (lato 2). Su a riposo = M1 RISE
+24.2  pad2 su giu
+24.3  pad2 su su
+24.4  controlla M1RISE = 1
+24.4  controlla pagina 2 = MIX
+# Guide con due gamepad: niente, pad1 resta sul lato 1
+24.4  pad1 guide giu
+24.5  pad1 guide su
+24.6  pad1 su giu
+24.7  pad1 su su
+24.8  controlla CUTOFF = 65
+# pad2 Start toccato = FREEZE; tenuto = SCENE (Destra = MORPH)
+25.0  pad2 start giu
+25.1  pad2 start su
+25.2  controlla FREEZE = 1
+25.3  pad2 start giu
+25.6  pad2 destra giu
+25.7  pad2 destra su
+25.72 controlla pagina 2 = SCENE
+25.75 foto  pad2_scene
+25.8  pad2 start su
+25.9  controlla MORPH = 3
+26.0  pad2 start giu
+26.1  pad2 start su
+26.15 controlla FREEZE = 0
+# pad2 Select = MACROS (R1 = M3), + Croce SEQ, + Quadrato PULSE, + Triangolo CLOCK, + Cerchio EDIT
+26.2  pad2 select giu
+26.3  pad2 r1 giu
+26.35 controlla pagina 2 = MACROS
+26.4  pad2 r1 su
+26.5  controlla M3UNREST = 1
+26.5  pad2 croce giu
+26.6  pad2 destra giu
+26.65 controlla pagina 2 = SEQ
+26.7  pad2 destra su
+26.8  pad2 croce su
+26.9  controlla MUTATE = 31
+26.9  pad2 quadrato giu
+27.0  pad2 su giu
+27.05 controlla pagina 2 = PULSE
+27.1  pad2 su su
+27.2  pad2 quadrato su
+27.3  controlla HITS1 = 4
+27.3  pad2 triangolo giu
+27.4  pad2 su giu
+27.45 controlla pagina 2 = CLOCK
+27.5  pad2 su su
+27.6  pad2 triangolo su
+27.7  controlla BPM = 41
+27.7  pad2 cerchio giu
+27.8  pad2 destra giu
+27.85 controlla pagina 2 = EDIT
+27.9  pad2 destra su
+27.95 foto  pad2_edit
+28.0  pad2 cerchio su
+28.1  pad2 select su
+# pad2 Cerchio due volte = SPACE fissa; Su alza WIDE. Intanto pad1 tiene Croce: due pannelli
+28.3  pad2 cerchio giu
+28.35 pad2 cerchio su
+28.45 pad2 cerchio giu
+28.5  pad2 cerchio su
+28.6  pad2 su giu
+28.7  pad2 su su
+28.8  controlla WIDE = 41
+28.8  controlla pagina 2 = SPACE
+28.8  pad1 croce giu
+29.2  foto  pad_due_lati
+29.2  controlla pagina 1 = OSC
+29.2  controlla pagina 2 = SPACE
+29.3  pad1 croce su
+29.4  pad2 cerchio giu
+29.5  pad2 cerchio su
+29.55 controlla pagina 2 = MIX
+# Levetta sinistra del pad2 tutta su per 0,2 s = MACRO 1 (M1 RISE) su di 55
+29.6  pad2 leva sx 0 -1
+29.8  pad2 leva sx 0 0
+29.9  controlla M1RISE = 56
+30.5  controlla livello > 0.01
+30.5  fine

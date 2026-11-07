@@ -1,0 +1,123 @@
+# Compila storm su Windows, macOS e Linux, fa girare il modo prova (senza finestra ne' audio)
+# e tiene i pacchetti e gli md5 di WAV e foto: devono essere uguali su tutte le piattaforme.
+# Il codice sta in una cartella con lo spazio nel nome, come sul PC di sviluppo.
+name: build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: storm pc
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: storm pc
+      # stesso compilatore del PC di sviluppo: gcc di MSYS2 UCRT64
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: UCRT64
+          install: mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-cmake mingw-w64-ucrt-x86_64-ninja
+      - name: Compila
+        shell: msys2 {0}
+        run: |
+          cmake -G Ninja -S . -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build
+      - name: Prove
+        run: python prove/esegui.py --lunghe --uscite out
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: md5-windows
+          path: storm pc/out/md5.txt
+      # l'artefatto si scarica gia' come storm-windows.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: storm-windows
+          path: |
+            storm pc/build/storm.exe
+            storm pc/LEGGIMI.md
+
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: storm pc
+      - name: Compila (universale arm64 + x86_64)
+        run: |
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64"
+          cmake --build build --parallel
+      - name: Controlla architetture e firma
+        run: |
+          lipo -archs build/storm.app/Contents/MacOS/storm
+          lipo build/storm.app/Contents/MacOS/storm -verify_arch arm64 x86_64
+          codesign -v build/storm.app
+      - name: Prove arm64
+        run: python3 prove/esegui.py --lunghe --uscite out
+      # la parte x86_64 dell'exe universale, fatta girare con Rosetta
+      - name: Prove x86_64
+        if: always()
+        run: |
+          lipo build/storm.app/Contents/MacOS/storm -thin x86_64 -output build/storm_x64
+          python3 prove/esegui.py --lunghe --uscite out_x64 build/storm_x64
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: md5-macos-arm64
+          path: storm pc/out/md5.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: md5-macos-x86_64
+          path: storm pc/out_x64/md5.txt
+      # ditto tiene firma, attributi e permessi dentro storm.app
+      - name: Pacchetto
+        run: ditto -c -k --keepParent build/storm.app storm-macos.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: storm-macos
+          path: storm pc/storm-macos.zip
+
+  linux:
+    # 22.04 e non l'ultima: l'exe gira anche con la glibc di 2-3 anni fa
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: storm pc
+      - name: Pacchetti
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake ninja-build pkg-config libasound2-dev libx11-dev libxext-dev libxrandr-dev libxcursor-dev libxfixes-dev libxi-dev libxss-dev libxtst-dev libxkbcommon-dev libwayland-dev libdecor-0-dev libegl1-mesa-dev libgl1-mesa-dev libgles2-mesa-dev libdrm-dev libgbm-dev libpulse-dev libpipewire-0.3-dev libdbus-1-dev libudev-dev libibus-1.0-dev
+      - name: Compila
+        run: |
+          cmake -G Ninja -S . -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build
+      # MIDI con ALSA e senza JACK (su file: con pipefail "ldd | grep -q" puo' fallire per niente)
+      - name: Controlla librerie
+        run: |
+          ldd build/storm > ldd.txt
+          cat ldd.txt
+          grep -q libasound ldd.txt
+          if grep -q libjack ldd.txt; then echo "dipende da libjack"; exit 1; fi
+      - name: Prove
+        run: python3 prove/esegui.py --lunghe --uscite out
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: md5-linux
+          path: storm pc/out/md5.txt
+      # tar.gz: lo zip degli artefatti perderebbe il permesso di esecuzione
+      - name: Pacchetto
+        run: tar -czf storm-linux-x86_64.tar.gz -C build storm
+      - uses: actions/upload-artifact@v4
+        with:
+          name: storm-linux-x86_64
+          path: storm pc/storm-linux-x86_64.tar.gz

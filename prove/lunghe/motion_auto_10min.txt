@@ -1,0 +1,114 @@
+# 10 minuti con MOTION e AUTO accesi. MOD A, B, C piu' veloci e profondi; tre scene salvate in RAM
+# dalla GUIDE (SAVE SCENE: senza memory card il posto si riempie lo stesso), poi AUTO (pad 2,
+# Start tenuto = pagina SCENE, L2): ogni 20 s la scena dopo, con 10 s di scivolata.
+# Controlla che il suono non si spenga e che le scene girino.
+# secondi  dispositivo  evento
+1.0   pad2 croce giu
+1.2   pad2   su giu
+2.2   pad2   su su
+2.4   pad2   destra giu
+3.4   pad2   destra su
+3.5   pad2 croce su
+3.7   pad2 quadrato giu
+3.9   pad2   destra giu
+4.9   pad2   destra su
+5.0   pad2 quadrato su
+5.2   pad2 triangolo giu
+5.4   pad2   su giu
+6.4   pad2   su su
+6.6   pad2   destra giu
+7.6   pad2   destra su
+7.7   pad2 triangolo su
+8.0   controlla DEPTH_A = 74
+8.0   controlla DEPTH_B = 64
+8.0   controlla DEPTH_C = 69
+# scena 1 = il suono di adesso: GUIDE, 3 volte su = SAVE SCENE, X, Triangolo chiude
+9.0   pad1   select giu
+9.1   pad1   start giu
+10.4  pad1   start su
+10.5  pad1   select su
+11.0  pad1   su giu
+11.1  pad1   su su
+11.3  pad1   su giu
+11.4  pad1   su su
+11.6  pad1   su giu
+11.7  pad1   su su
+12.0  pad1   croce giu
+12.1  pad1   croce su
+13.0  pad1   triangolo giu
+13.1  pad1   triangolo su
+# scena 2: cutoff aperto, piu' fold, ROOM ECHO
+14.0  pad1   su giu
+15.0  pad1   su su
+15.5  pad1   quadrato giu
+15.7  pad1   su giu
+16.7  pad1   su su
+16.8  pad1   quadrato su
+17.0  pad2   cerchio giu
+17.2  pad2   r1 giu
+17.3  pad2   r1 su
+17.5  pad2   cerchio su
+17.6  controlla CUTOFF = 84
+17.6  controlla FOLD = 64
+17.6  controlla ROOM = 3
+18.0  pad1   select giu
+18.1  pad1   start giu
+19.4  pad1   start su
+19.5  pad1   select su
+20.0  pad1   destra giu
+20.1  pad1   destra su
+20.4  pad1   croce giu
+20.5  pad1   croce su
+21.0  pad1   triangolo giu
+21.1  pad1   triangolo su
+# scena 3: cutoff basso, SUB pieno, M1 RISE a 39, ROOM STUDIO
+22.0  pad1   giu giu
+23.5  pad1   giu su
+24.0  pad1   croce giu
+24.2  pad1   r2 giu
+25.2  pad1   r2 su
+25.3  pad1   croce su
+25.5  pad2   su giu
+26.5  pad2   su su
+26.7  pad2   cerchio giu
+26.9  pad2   l1 giu
+27.0  pad2   l1 su
+27.2  pad2   l1 giu
+27.3  pad2   l1 su
+27.5  pad2   cerchio su
+27.6  controlla CUTOFF = 20
+27.6  controlla SUB = 89
+27.6  controlla M1RISE = 39
+27.6  controlla ROOM = 1
+28.0  pad1   select giu
+28.1  pad1   start giu
+29.4  pad1   start su
+29.5  pad1   select su
+30.0  pad1   destra giu
+30.1  pad1   destra su
+30.4  pad1   croce giu
+30.5  pad1   croce su
+31.0  pad1   triangolo giu
+31.1  pad1   triangolo su
+# AUTO: Start del pad 2 tenuto (pagina SCENE) + L2
+32.0  pad2 start giu
+32.5  pad2 l2 giu
+32.6  pad2 l2 su
+33.0  pad2 start su
+48.0  controlla CUTOFF = 45
+60.0  controlla livello > 0.02
+68.0  controlla CUTOFF = 84
+68.0  controlla ROOM = 3
+88.0  controlla CUTOFF = 20
+88.0  controlla SUB = 89
+120.0  controlla livello > 0.02
+180.0  controlla livello > 0.02
+240.0  controlla livello > 0.02
+300.0  controlla livello > 0.02
+360.0  controlla livello > 0.02
+420.0  controlla livello > 0.02
+480.0  controlla livello > 0.02
+540.0  controlla livello > 0.02
+588.0 controlla CUTOFF = 45
+600.0  controlla livello > 0.02
+600.0 fine

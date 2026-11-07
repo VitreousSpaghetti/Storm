@@ -1,0 +1,6 @@
+# Avvio lungo: la patch iniziale senza toccare niente per 60 s. MOD A (SIN su CUTOFF, un giro ogni
+# ~37 s) apre e chiude il filtro: le alte salgono e scendono da sole.
+# secondi  dispositivo  evento
+0.0   controlla VOLUME = 80
+60.0  controlla livello > 0.05
+60.0  fine

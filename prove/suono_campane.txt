@@ -1,0 +1,25 @@
+# BELLS: la FM hardware della SPU (PMON). Solo gli strati (VOLUME 0, LAYERS 99), accordo UNISON,
+# BELLS che sale a meta' e poi al massimo; alla fine DETUNE a 0 per le campane pulite.
+# secondi  dispositivo  evento
+0.0   controlla BELLS = 10
+0.5   pad2 l2 giu
+3.1   pad2 l2 su
+3.2   pad2 r1 giu
+5.8   pad2 r1 su
+6.0   pad1 cerchio giu
+6.2   pad1 l1 giu
+6.3   pad1 l1 su
+7.0   pad1 destra giu
+8.0   pad1 destra su
+8.0   controlla BELLS = 49
+8.0   controlla CHORD = 0
+11.0  controlla livello > 0.01
+11.0  pad1 destra giu
+13.6  pad1 destra su
+14.0  controlla BELLS = 99
+17.0  pad1 giu giu
+19.6  pad1 giu su
+20.0  pad1 cerchio su
+20.0  controlla DETUNE = 0
+22.0  controlla livello > 0.01
+23.0  fine

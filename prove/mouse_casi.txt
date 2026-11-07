@@ -1,0 +1,58 @@
+# Mouse, casi al bordo (standard/mouse/mouse.md): due trascinamenti veloci non fanno un doppio clic;
+# la rotella parte dal valore che il synth mostra anche se un altro ingresso l'ha appena cambiato;
+# rotella durante il trascinamento; LOCK tenuto e lasciato fuori dal pulsante non fa niente.
+# Posizioni come in mouse.txt: SHAPE 123,81, manopola 1 (CUTOFF) 250,80, LOCK 284,7.
+# secondi  dispositivo  evento
+0.5   mouse muovi 160 120
+0.6   mouse giu 123 81
+0.65  mouse su
+0.9   controlla CUTOFF = 45
+# Due trascinamenti di fila a meno di 400 ms: +10 e +10, il secondo non torna al valore iniziale
+1.00  mouse giu 250 80
+1.05  mouse muovi 250 70
+1.10  mouse su
+1.30  mouse giu 250 80
+1.35  mouse muovi 250 70
+1.40  mouse su
+1.60  controlla CUTOFF = 65
+# Un doppio clic vero torna ancora al valore iniziale
+1.80  mouse giu 250 80
+1.85  mouse su
+1.95  mouse giu 250 80
+2.00  mouse su
+2.30  controlla CUTOFF = 45
+# Rotella, poi Shift+W dalla tastiera (+10), poi subito rotella: si parte dal valore della tastiera
+2.60  mouse rotella 250 80 1
+2.65  tasto shift giu
+2.66  tasto w giu
+2.67  tasto w su
+2.68  tasto shift su
+2.72  controlla CUTOFF = 56
+2.75  mouse rotella 250 80 1
+2.90  controlla CUTOFF = 57
+# e anche dopo 250 ms
+3.60  tasto shift giu
+3.61  tasto w giu
+3.62  tasto w su
+3.63  tasto shift su
+3.90  mouse rotella 250 80 1
+4.10  controlla CUTOFF = 68
+# Rotella durante il trascinamento: +5 resta, il pixel dopo aggiunge 1
+4.50  mouse giu 250 80
+4.55  mouse rotella 250 80 5
+4.65  mouse muovi 250 79
+4.70  mouse su
+4.90  controlla CUTOFF = 74
+# LOCK tenuto 1,3 s ma lasciato fuori dal pulsante: niente
+5.20  mouse giu 284 7
+5.30  mouse muovi 160 120
+6.50  mouse su
+6.70  controlla LOCK = 0
+# tenuto 1,3 s sopra il pulsante: acceso; di nuovo: spento
+6.80  mouse giu 284 7
+8.10  mouse su
+8.30  controlla LOCK = 1
+8.40  mouse giu 284 7
+9.70  mouse su
+9.90  controlla LOCK = 0
+10.0  fine

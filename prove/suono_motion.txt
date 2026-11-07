@@ -1,0 +1,71 @@
+# MOTION: MOD A (pad 2, X tenuto) piu' veloce e profondo, le 5 forme, poi su PITCH; FREEZE ferma
+# i movimenti; MOD B (Quadrato) RANDOM veloce sul FOLD.
+# secondi  dispositivo  evento
+0.0   controlla RATE_A = 20
+0.0   controlla DEPTH_A = 35
+2.0   pad2 croce giu
+2.2   pad2 su giu
+3.2   pad2 su su
+3.4   pad2 destra giu
+6.0   pad2 destra su
+6.5   controlla RATE_A = 59
+6.5   controlla DEPTH_A = 99
+# WAVE: SIN -> TRI -> BREATH -> RANDOM -> NOISE
+9.0   pad2   r1 giu
+9.1   pad2   r1 su
+12.0  pad2   r1 giu
+12.1  pad2   r1 su
+15.0  pad2   r1 giu
+15.1  pad2   r1 su
+18.0  pad2   r1 giu
+18.1  pad2   r1 su
+20.9  controlla WAVE_A = 4
+# di nuovo SIN, destinazione PITCH (10 passi da CUTOFF)
+21.0  pad2   l1 giu
+21.1  pad2   l1 su
+21.2  pad2   l1 giu
+21.3  pad2   l1 su
+21.4  pad2   l1 giu
+21.5  pad2   l1 su
+21.6  pad2   l1 giu
+21.7  pad2   l1 su
+22.0  pad2   r2 giu
+22.1  pad2   r2 su
+22.2  pad2   r2 giu
+22.3  pad2   r2 su
+22.4  pad2   r2 giu
+22.5  pad2   r2 su
+22.6  pad2   r2 giu
+22.7  pad2   r2 su
+22.8  pad2   r2 giu
+22.9  pad2   r2 su
+23.0  pad2   r2 giu
+23.1  pad2   r2 su
+23.2  pad2   r2 giu
+23.3  pad2   r2 su
+23.4  pad2   r2 giu
+23.5  pad2   r2 su
+23.6  pad2   r2 giu
+23.7  pad2   r2 su
+23.8  pad2   r2 giu
+23.9  pad2   r2 su
+24.0  pad2 croce su
+24.0  controlla WAVE_A = 0
+24.0  controlla DEST_A = 10
+27.0  controlla livello > 0.03
+# FREEZE (Start del pad 2 toccato) e di nuovo via
+28.0  pad2 start giu
+28.1  pad2 start su
+31.0  pad2 start giu
+31.1  pad2 start su
+# MOD B: RANDOM veloce e profondo sul FOLD
+33.0  pad2 quadrato giu
+33.2  pad2 su giu
+35.8  pad2 su su
+36.0  pad2 destra giu
+38.6  pad2 destra su
+39.0  pad2 quadrato su
+39.0  controlla RATE_B = 99
+39.0  controlla DEPTH_B = 99
+42.0  controlla livello > 0.03
+43.0  fine

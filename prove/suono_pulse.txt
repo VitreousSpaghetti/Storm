@@ -1,0 +1,62 @@
+# PULSE: ritmi euclidei sul CLOCK. MOD A in PULSE1 sul CUTOFF (profondo), MOD C in PULSE2 sugli
+# strati; THUMP (colpo basso su PULSE 1) e WIND (pad 1, Select + X = TEXTURE); PULSE 1 = E(5,8);
+# BPM piu' alto.
+# secondi  dispositivo  evento
+0.0   controlla HITS1 = 3
+0.0   controlla STEPS1 = 8
+2.0   pad2 croce giu
+2.2   pad2   r1 giu
+2.3   pad2   r1 su
+2.4   pad2   r1 giu
+2.5   pad2   r1 su
+2.6   pad2   r1 giu
+2.7   pad2   r1 su
+2.8   pad2   r1 giu
+2.9   pad2   r1 su
+3.0   pad2   r1 giu
+3.1   pad2   r1 su
+3.3   pad2 destra giu
+5.9   pad2 destra su
+6.0   pad2 croce su
+6.0   controlla WAVE_A = 5
+6.0   controlla DEPTH_A = 99
+6.5   pad2 triangolo giu
+6.7   pad2   r1 giu
+6.8   pad2   r1 su
+6.9   pad2   r1 giu
+7.0   pad2   r1 su
+7.1   pad2   r1 giu
+7.2   pad2   r1 su
+7.3   pad2   r1 giu
+7.4   pad2   r1 su
+7.6   pad2 triangolo su
+7.6   controlla WAVE_C = 6
+12.0  controlla livello > 0.03
+# THUMP (a 29: a 99 sopra il drone il mix della SPU satura, come sulla PS1) e WIND
+12.0  pad1 select giu
+12.1  pad1 croce giu
+12.3  pad1 su giu
+13.1  pad1 su su
+15.0  pad1 destra giu
+16.0  pad1 destra su
+16.1  pad1 croce su
+16.2  pad1 select su
+16.2  controlla THUMP = 29
+16.2  controlla WIND = 39
+# PULSE 1 = E(5,8), BPM 119
+22.0  pad2 select giu
+22.1  pad2 quadrato giu
+22.3  pad2   su giu
+22.4  pad2   su su
+22.5  pad2   su giu
+22.6  pad2   su su
+22.7  pad2 quadrato su
+23.0  pad2 triangolo giu
+23.2  pad2 su giu
+24.2  pad2 su su
+24.4  pad2 triangolo su
+24.5  pad2 select su
+24.5  controlla HITS1 = 5
+24.5  controlla BPM = 79
+34.0  controlla livello > 0.03
+36.0  fine

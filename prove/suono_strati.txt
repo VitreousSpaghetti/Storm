@@ -1,0 +1,52 @@
+# LAYERS: 4 voci SPU (sega a ciclo singolo un'ottava sopra, PMON dalla voce prima). Il motore DSP
+# si spegne (VOLUME 0 sul pad 2) per sentire solo gli strati; poi COLOR, DETUNE e CHORD (pad 1,
+# Cerchio tenuto = pagina LAYERS).
+# secondi  dispositivo  evento
+0.0   controlla LAYERS = 45
+0.0   controlla COLOR = 1
+2.0   pad2 l2 giu
+4.6   pad2 l2 su
+5.0   pad2 r1 giu
+7.6   pad2 r1 su
+8.0   controlla VOLUME = 0
+8.0   controlla LAYERS = 99
+10.0  controlla livello > 0.01
+# COLOR: SOFT -> WARM -> BRIGHT -> THIN -> AIR, poi DARK
+10.0  pad1 cerchio giu
+10.5  pad1 r2 giu
+10.6  pad1 r2 su
+12.5  pad1 r2 giu
+12.6  pad1 r2 su
+14.5  pad1 r2 giu
+14.6  pad1 r2 su
+16.5  pad1 r2 giu
+16.6  pad1 r2 su
+18.4  controlla COLOR = 5
+18.5  pad1 l2 giu
+18.6  pad1 l2 su
+18.7  pad1 l2 giu
+18.8  pad1 l2 su
+18.9  pad1 l2 giu
+19.0  pad1 l2 su
+19.1  pad1 l2 giu
+19.2  pad1 l2 su
+19.3  pad1 l2 giu
+19.4  pad1 l2 su
+# DETUNE al massimo (~30 cent)
+20.0  pad1 su giu
+22.6  pad1 su su
+# CHORD: 5TH -> OCTAVE -> 2 OCT -> MINOR -> MAJOR
+25.0  pad1 r1 giu
+25.1  pad1 r1 su
+27.0  pad1 r1 giu
+27.1  pad1 r1 su
+29.0  pad1 r1 giu
+29.1  pad1 r1 su
+31.0  pad1 r1 giu
+31.1  pad1 r1 su
+35.0  pad1 cerchio su
+35.0  controlla COLOR = 0
+35.0  controlla DETUNE = 99
+35.0  controlla CHORD = 5
+35.0  controlla livello > 0.01
+37.0  fine

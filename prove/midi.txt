@@ -1,0 +1,154 @@
+# MIDI (standard/midi/midi.md) con la mappa predefinita (mappe/storm.txt): note, legato e accordo,
+# CC fissi col soft takeover, CC di pagina (anche del lato 2), encoder, 14 bit, pitch bend,
+# pressione (SINK), pedale HOLD, program change, MIDI learn e CLEAR col mouse, clock esterno, PLAY.
+# Posizioni del mouse come in mouse.txt: SHAPE 123,81; manopole del pannello davanti 250,80 / 103.
+# secondi  dispositivo  evento
+0.0   mouse muovi 160 120
+# Una nota = la nota del drone: 48 = DO3 -> OCTAVE 2, ROOT 3 (ROOT 0 = LA)
+0.2   midi nota 48 100
+0.3   controlla OCTAVE = 2
+0.3   controlla ROOT = 3
+# Legato: una nota nuova tenendo l'altra da piu' di 50 ms = nuova nota, CHORD resta 5TH (1)
+0.6   midi nota 55 90 canale 2
+0.7   controlla ROOT = 10
+0.7   controlla CHORD = 1
+0.8   midi nota 48 0
+0.8   midi nota 55 0 canale 2
+# Accordo: tre note entro 50 ms = la piu' bassa e' la nota, LA DO MI = minore (CHORD 4)
+1.000 midi nota 64 100
+1.013 midi nota 57 100
+1.030 midi nota 60 100
+1.2   controlla OCTAVE = 3
+1.2   controlla ROOT = 0
+1.2   controlla CHORD = 4
+1.3   foto  midi_accordo
+# Lasciate tutte: il drone resta sull'ultima
+1.5   midi nota 57 0
+1.5   midi nota 60 0
+1.5   midi nota 64 0
+1.8   controlla OCTAVE = 3
+1.8   controlla ROOT = 0
+# CC fisso 74 = CUTOFF (45 = CC 58): la manopola lontana non lo cambia...
+2.0   midi cc 74 10
+2.2   midi cc 74 40
+2.3   controlla CUTOFF = 45
+# ...finche' non ci passa sopra; poi lo segue
+2.4   midi cc 74 70
+2.5   controlla CUTOFF = 55
+2.6   midi cc 74 100
+2.7   controlla CUTOFF = 78
+# Il mouse cambia CUTOFF: la manopola MIDI lo deve riprendere (segno grigio sulla manopola)
+2.8   mouse giu 123 81
+2.85  mouse su
+3.0   mouse rotella 250 80 -10
+3.2   controlla CUTOFF = 68
+3.3   midi cc 74 110
+3.4   controlla CUTOFF = 68
+3.5   foto  midi_takeover
+3.6   midi cc 74 80
+3.7   controlla CUTOFF = 62
+# Un secondo CC sullo stesso parametro (21 = manopola 1 di SHAPE = CUTOFF) lontano: niente salto
+3.75  midi cc 21 0
+3.85  controlla CUTOFF = 62
+# CC di pagina: 20 = pagina del lato 1 (7 pagine: 60 -> NOTE), 23 = sua manopola 3 (GLIDE)
+4.0   midi cc 20 60
+4.2   controlla pagina 1 = NOTE
+4.3   midi cc 23 32
+4.4   midi cc 23 0
+4.5   controlla GLIDE = 0
+4.6   midi cc 20 0
+4.8   controlla pagina 1 = SHAPE
+# CC 16 = FOLD assoluto (FOLD 25 = 32/127: la manopola ci passa sopra); l'encoder in midi_encoder.txt
+5.0   midi cc 16 20
+5.05  midi cc 16 40
+5.2   controlla FOLD = 31
+# 14 bit: CC 7 (VOLUME) e subito CC 39 = un valore solo (CC 7 100 da solo darebbe 78)
+5.4   midi cc 7 103
+5.5   midi cc 7 100
+5.5   midi cc 39 0
+5.7   controlla VOLUME = 77
+# Pitch bend (+2 semitoni sopra FINE: FINE non cambia), poi al centro
+6.0   midi piega 8191
+6.5   controlla FINE = 50
+6.8   midi piega 0
+# Aftertouch di canale = gesto SINK: si somma alla macro 2, la manopola M2 DEEP non si muove
+7.0   midi pressione 64
+7.2   controlla M2DEEP = 0
+7.3   midi pressione 0
+7.5   controlla M2DEEP = 0
+# Pedale sustain (CC 64) = HOLD finche' e' giu'
+7.6   midi cc 64 127
+7.8   controlla HOLD = 1
+7.9   midi cc 64 0
+8.1   controlla HOLD = 0
+8.1   controlla TAIL = 60
+# Program change 2 = scena 3, vuota: niente
+8.3   midi programma 2
+8.6   controlla CUTOFF = 62
+# Lato 2 coi CC: 25 = sua pagina (10 pagine: 120 -> SCENE), 27 = manopola 2 (MORPH 2 S)
+8.8   midi cc 25 120
+9.0   controlla pagina 2 = SCENE
+9.1   midi cc 27 42
+9.2   midi cc 27 0
+9.3   controlla MORPH = 0
+9.4   midi cc 25 0
+9.6   controlla pagina 2 = MIX
+# Scena salvata (Ctrl+S, Invio: posto 1), CUTOFF cambiato, program change 0 la richiama in 2 s
+9.8   tasto ctrl giu
+9.85  tasto s giu
+9.9   tasto s su
+9.95  tasto ctrl su
+10.0  tasto invio giu
+10.1  tasto invio su
+10.2  tasto esc giu
+10.25 tasto esc su
+10.4  midi cc 74 100
+10.5  controlla CUTOFF = 78
+10.6  midi programma 0
+13.0  controlla CUTOFF = 62
+# MIDI learn col mouse: tasto destro su RES (SHAPE davanti), LEARN, poi CC 30; il valore non salta
+13.2  mouse giu 123 81
+13.25 mouse su
+13.4  mouse destro 250 103
+13.5  mouse giu 255 108
+13.55 mouse su
+13.6  mouse muovi 250 103
+13.7  foto  midi_learn
+13.8  midi cc 30 20
+13.9  controlla RES = 30
+14.0  midi cc 30 40
+14.1  controlla RES = 31
+# CLEAR: CC 30 non muove piu' RES
+14.2  mouse destro 250 103
+14.3  mouse giu 255 121
+14.35 mouse su
+14.5  midi cc 30 100
+14.6  controlla RES = 31
+# THUMP (pagina TEXTURE coi CC 20-21) per sentire PULSE 1; clock esterno a 120: il CLOCK lo segue
+14.8  mouse giu 8 120
+14.85 mouse su
+15.0  midi cc 20 115
+15.2  controlla pagina 1 = TEXTURE
+15.3  midi cc 21 0
+15.4  midi cc 21 90
+15.5  controlla THUMP = 70
+15.6  midi cc 20 0
+15.8  midi cc 25 105
+16.0  controlla pagina 2 = CLOCK
+16.0  clock start
+16.0  clock bpm 120
+20.0  foto  midi_clock
+24.0  clock stop
+24.5  controlla livello > 0.05
+27.5  foto  midi_clock_fermo
+27.6  midi cc 25 0
+# PLAY acceso: le note suonano lo stesso; la striscia mostra il tasto suonato, la velocita' gonfia SWELL
+28.0  tasto p giu
+28.05 tasto p su
+28.2  controlla PLAY = 1
+28.3  midi nota 52 127
+28.5  controlla ROOT = 7
+29.3  foto  midi_play
+29.5  midi nota 52 0
+30.0  controlla livello > 0.05
+30.0  fine

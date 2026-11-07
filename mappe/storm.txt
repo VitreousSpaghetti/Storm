@@ -1,0 +1,56 @@
+# Mappa MIDI predefinita di storm (formato in standard/midi/midi.md): una regola per riga,
+# "#" = commento. E' compilata dentro il programma; la mappa dell'utente (MIDI learn, o --mappa)
+# si legge dopo e vince su questa.
+canale      omni
+
+# CC fissi: i numeri consigliati dal MIDI, qualunque pagina sia aperta
+cc 74       = CUTOFF        # brillantezza
+cc 71       = RES           # risonanza
+cc 91       = REVERB        # mandata del riverbero
+cc 7        = VOLUME
+cc 1        = M3UNREST      # mod wheel = macro 3
+cc 11       = M1RISE        # expression (pedale) = macro 1, come lo SWELL
+cc 5        = GLIDE         # portamento time
+cc 72       = TAIL          # release time = coda del riverbero
+cc 93       = LAYERS        # chorus = gli strati sopra la nota
+cc 94       = DETUNE        # celeste = quanto sono stonati gli strati
+cc 64       = HOLD          # pedale sustain: giu' = coda del riverbero ferma
+
+# "Sound controller" 70-77 del MIDI (le 8 manopole di molti controller piccoli): oltre a 71, 72
+# e 74 qui sopra, i suoni che in un drone contano di piu'. Un drone non ha attacco: 73 = SUB.
+cc 70       = DRIVE         # variazione del suono = saturazione
+cc 73       = SUB           # peso sotto la nota
+cc 75       = DAMP          # decay = quanto si spengono gli acuti nella coda
+cc 76       = RATE_A        # velocita' del vibrato = velocita' del MOD A
+cc 77       = DEPTH_A       # profondita' del vibrato = quanto si muove il MOD A
+
+# CC 16-19 (uso generale): i timbri che sul pad stanno sulle levette, piu' la macro 4
+cc 17       = FM
+cc 18       = WIDTH
+cc 19       = M4HAZE
+
+# CC di pagina: 20 / 25 scelgono la pagina del lato 1 / 2, 21-24 / 26-29 le sue 4 manopole
+cc 20-29    = pagine
+cc 16       = FOLD          # uso generale: assoluto (quasi tutti i controller)
+
+piega       = 2             # pitch bend: +-2 semitoni sopra FINE
+pressione   = SINK          # aftertouch di canale = gesto SINK (macro 2, si somma e ricade)
+nota        = drone         # la nota diventa la nota del drone; piu' note insieme = accordo
+programma   = scene         # program change 0-7 = scene 1-8
+
+# Zona comandi per le tastiere senza pulsanti: le note 36-47 non suonano ma lanciano comandi.
+# Spenta: per accenderla "zona 36-47 accesa" nella mappa dell'utente.
+zona        36-47 spenta
+zona 36     = SCENA 1
+zona 37     = SCENA 2
+zona 38     = SCENA 3
+zona 39     = SCENA 4
+zona 40     = SCENA 5
+zona 41     = SCENA 6
+zona 42     = SCENA 7
+zona 43     = SCENA 8
+zona 44     = PLAY          # acceso finche' tieni la nota
+zona 45     = FREEZE
+zona 46     = MUTE
+zona 47     = VISUAL
+# zona 37   = AVANTI        # anche le azioni secche: AVANTI / INDIETRO (passo del TUTORIAL), SALVA

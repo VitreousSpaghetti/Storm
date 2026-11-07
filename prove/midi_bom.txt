@@ -1,0 +1,7 @@
+# Mappa salvata con il BOM UTF-8 (prove/midi_bom.mappa): la prima riga, CC 75 = RES, vale lo stesso
+# secondi  dispositivo  evento
+0.0   mouse muovi 160 120
+0.2   midi cc 75 38
+0.3   midi cc 75 100
+0.4   controlla RES = 78
+0.5   fine

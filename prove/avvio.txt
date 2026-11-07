@@ -1,0 +1,7 @@
+# Avvio: il programma parte, suona, il livello e' sopra la soglia, foto della schermata.
+# secondi  dispositivo  evento
+0.0   controlla VOLUME = 80
+1.5   controlla livello > 0.05
+2.0   foto avvio
+3.0   controlla livello > 0.05
+3.0   fine

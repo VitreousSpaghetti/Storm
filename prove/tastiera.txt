@@ -1,0 +1,358 @@
+# Tastiera del PC (standard/tastiera/tastiera.md): le 4 manopole, pagine fisse (tocco) e
+# temporanee (tenuto) dei due lati, scorrimento, Shift = 10 passi, Ctrl = un passo, Esc, azioni
+# speciali e loro stato (standard/controlli/azioni.md). Tasti per posizione, nomi della tastiera americana.
+# secondi  dispositivo  evento
+0.0   controlla CUTOFF = 45
+# Lato 1 a riposo (SHAPE): W/Su alza CUTOFF, S/Giu' abbassa, D/A = RES, E/Q = MODE, R/F = DRIVE
+0.5   tasto w giu
+0.6   tasto w su
+0.7   tasto su giu
+0.8   tasto su su
+0.9   tasto s giu
+1.0   tasto s su
+1.1   controlla CUTOFF = 46
+1.2   tasto d giu
+1.3   tasto d su
+1.4   controlla RES = 31
+1.5   tasto a giu
+1.6   tasto a su
+1.6   tasto destra giu
+1.7   tasto destra su
+1.8   tasto sinistra giu
+1.9   tasto sinistra su
+2.0   controlla RES = 30
+2.0   tasto e giu
+2.1   tasto e su
+2.2   controlla MODE = 1
+2.2   tasto q giu
+2.3   tasto q su
+2.4   controlla MODE = 0
+2.4   tasto r giu
+2.5   tasto r su
+2.6   controlla DRIVE = 21
+2.6   tasto f giu
+2.7   tasto f su
+2.8   controlla DRIVE = 20
+# Tenuto: scorre come il pad (un passo, poi dopo 12 fotogrammi uno per fotogramma)
+3.0   tasto w giu
+4.0   tasto w su
+4.1   controlla CUTOFF = 85
+# Shift = 10 passi; Ctrl = un passo solo anche tenendo (Ctrl+S e' SALVA: qui Ctrl+Giu')
+4.2   tasto shift giu
+4.3   tasto s giu
+4.4   tasto s su
+4.5   tasto shift su
+4.6   controlla CUTOFF = 75
+4.7   tasto ctrl giu
+4.8   tasto giu giu
+5.8   tasto giu su
+5.9   tasto ctrl su
+6.0   controlla CUTOFF = 74
+# Pagine del lato 1: tocco = fissa (cornice gialla), tocco di nuovo = chiusa
+6.2   tasto 1 giu
+6.3   tasto 1 su
+6.5   tasto w giu
+6.6   tasto w su
+6.8   controlla SINE = 71
+6.8   controlla pagina 1 = OSC
+6.9   foto  tastiera_osc_fissa
+7.0   tasto 1 giu
+7.1   tasto 1 su
+7.3   tasto w giu
+7.4   tasto w su
+7.6   controlla SINE = 71
+7.6   controlla pagina 1 = SHAPE
+7.6   controlla CUTOFF = 75
+# Tenuto = temporanea: 2 (GRAIN) tenuto, D alza NOISE; lasciato si torna a SHAPE
+7.8   tasto 2 giu
+8.0   tasto d giu
+8.1   tasto d su
+8.2   foto  tastiera_grain_tenuta
+8.2   controlla pagina 1 = GRAIN
+8.4   tasto 2 su
+8.5   tasto d giu
+8.6   tasto d su
+8.8   controlla NOISE = 11
+8.8   controlla RES = 31
+8.8   controlla pagina 1 = SHAPE
+# 3 NOTE (scelta: un passo), 4 LAYERS, 5 OSC B, 6 TEXTURE
+9.0   tasto 3 giu
+9.1   tasto 3 su
+9.2   tasto w giu
+9.3   tasto w su
+9.4   controlla ROOT = 1
+9.4   controlla pagina 1 = NOTE
+9.4   tasto s giu
+9.5   tasto s su
+9.6   controlla ROOT = 0
+9.6   tasto 4 giu
+9.7   tasto 4 su
+9.8   tasto e giu
+9.9   tasto e su
+10.0  controlla CHORD = 2
+10.0  controlla pagina 1 = LAYERS
+10.0  tasto 5 giu
+10.1  tasto 5 su
+10.2  tasto w giu
+10.3  tasto w su
+10.4  controlla FM = 16
+10.4  controlla pagina 1 = OSC B
+10.4  tasto 6 giu
+10.5  tasto 6 su
+10.6  tasto f giu
+10.7  tasto f su
+10.8  controlla FINE = 49
+10.8  controlla pagina 1 = TEXTURE
+10.8  foto  tastiera_texture
+# 0 = di nuovo a riposo
+11.0  tasto 0 giu
+11.1  tasto 0 su
+11.2  tasto w giu
+11.3  tasto w su
+11.4  controlla CUTOFF = 76
+11.4  controlla pagina 1 = SHAPE
+11.4  controlla FINE = 49
+# Lato 2 con Shift + numero (Shift lasciato prima delle manopole, se no sono passi da 10)
+11.6  tasto shift giu
+11.6  tasto 1 giu
+11.7  tasto 1 su
+11.7  tasto shift su
+11.8  tasto w giu
+11.9  tasto w su
+12.0  controlla RATE_A = 21
+12.0  controlla pagina 2 = MOD A
+12.0  tasto shift giu
+12.0  tasto 2 giu
+12.1  tasto 2 su
+12.1  tasto shift su
+12.2  tasto w giu
+12.3  tasto w su
+12.4  controlla RATE_B = 26
+12.4  controlla pagina 2 = MOD B
+12.4  tasto shift giu
+12.4  tasto 3 giu
+12.5  tasto 3 su
+12.5  tasto shift su
+12.6  tasto w giu
+12.7  tasto w su
+12.8  controlla RATE_C = 16
+12.8  controlla pagina 2 = MOD C
+12.8  tasto shift giu
+12.8  tasto 4 giu
+12.9  tasto 4 su
+12.9  tasto shift su
+13.0  tasto w giu
+13.1  tasto w su
+13.2  controlla WIDE = 41
+13.2  controlla pagina 2 = SPACE
+13.2  tasto shift giu
+13.2  tasto 5 giu
+13.3  tasto 5 su
+13.3  tasto shift su
+13.4  tasto e giu
+13.5  tasto e su
+13.6  controlla M3UNREST = 1
+13.6  controlla pagina 2 = MACROS
+13.6  tasto shift giu
+13.6  tasto 6 giu
+13.7  tasto 6 su
+13.7  tasto shift su
+13.8  tasto d giu
+13.9  tasto d su
+14.0  controlla MUTATE = 31
+14.0  controlla pagina 2 = SEQ
+14.0  tasto shift giu
+14.0  tasto 7 giu
+14.1  tasto 7 su
+14.1  tasto shift su
+14.2  tasto w giu
+14.3  tasto w su
+14.4  controlla HITS1 = 4
+14.4  controlla pagina 2 = PULSE
+# 8 CLOCK: W alza BPM; R toccato due volte a 0,5 s = TAP (120 BPM = manopola 80)
+14.4  tasto shift giu
+14.4  tasto 8 giu
+14.5  tasto 8 su
+14.5  tasto shift su
+14.6  tasto w giu
+14.7  tasto w su
+14.8  controlla BPM = 41
+14.8  controlla pagina 2 = CLOCK
+15.0  tasto r giu
+15.1  tasto r su
+15.5  tasto r giu
+15.6  tasto r su
+15.8  controlla BPM = 80
+# 9 SCENE: D alza MORPH; - EDIT (destinazioni delle macro)
+15.8  tasto shift giu
+15.8  tasto 9 giu
+15.9  tasto 9 su
+15.9  tasto shift su
+16.0  tasto d giu
+16.1  tasto d su
+16.2  controlla MORPH = 3
+16.2  controlla pagina 2 = SCENE
+16.2  foto  tastiera_scene
+16.4  tasto shift giu
+16.4  tasto - giu
+16.5  tasto - su
+16.5  tasto shift su
+16.6  tasto d giu
+16.7  tasto d su
+16.8  foto  tastiera_edit
+16.8  controlla pagina 2 = EDIT
+# Shift + 0 = lato 2 a riposo (MIX): W alza M1 RISE
+17.0  tasto shift giu
+17.0  tasto 0 giu
+17.1  tasto 0 su
+17.1  tasto shift su
+17.2  tasto w giu
+17.3  tasto w su
+17.4  controlla M1RISE = 1
+17.4  controlla pagina 2 = MIX
+17.4  tasto s giu
+17.5  tasto s su
+17.6  controlla M1RISE = 0
+# Esc chiude le pagine fisse dei due lati
+17.6  tasto 1 giu
+17.7  tasto 1 su
+17.8  tasto shift giu
+17.8  tasto 4 giu
+17.9  tasto 4 su
+17.9  tasto shift su
+18.0  controlla pagina 1 = OSC
+18.0  controlla pagina 2 = SPACE
+18.0  tasto esc giu
+18.1  tasto esc su
+18.2  tasto w giu
+18.3  tasto w su
+18.4  controlla M1RISE = 1
+18.4  controlla WIDE = 41
+18.4  controlla pagina 1 = SHAPE
+18.4  controlla pagina 2 = MIX
+18.4  tasto s giu
+18.5  tasto s su
+# Azioni speciali. H = HOLD (TAIL 99), di nuovo = come prima
+18.6  tasto h giu
+18.7  tasto h su
+18.8  controlla TAIL = 99
+18.8  controlla HOLD = 1
+18.8  tasto h giu
+18.9  tasto h su
+19.0  controlla TAIL = 60
+19.0  controlla HOLD = 0
+# Spazio = FREEZE, P = PLAY (le frecce del lato 1 a riposo suonano: CUTOFF fermo)
+19.0  tasto 0 giu
+19.1  tasto 0 su
+19.2  tasto spazio giu
+19.3  tasto spazio su
+19.4  tasto p giu
+19.5  tasto p su
+19.6  tasto w giu
+20.6  foto  tastiera_play_freeze
+20.6  tasto w su
+20.8  controlla CUTOFF = 76
+20.8  controlla FREEZE = 1
+20.8  controlla PLAY = 1
+20.8  tasto p giu
+20.9  tasto p su
+21.0  tasto spazio giu
+21.1  tasto spazio su
+# Ctrl + L = LOCK: le manopole non vanno, M (MUTE) si'
+21.2  controlla FREEZE = 0
+21.2  controlla PLAY = 0
+21.2  tasto ctrl giu
+21.2  tasto l giu
+21.3  tasto l su
+21.3  tasto ctrl su
+21.4  tasto w giu
+21.5  tasto w su
+21.6  tasto 1 giu
+21.7  tasto 1 su
+21.8  tasto w giu
+21.9  tasto w su
+22.0  controlla CUTOFF = 76
+22.0  controlla SINE = 71
+22.0  controlla LOCK = 1
+22.0  tasto m giu
+22.1  tasto m su
+27.0  controlla livello < 0.001
+27.0  controlla MUTE = 1
+27.0  foto  tastiera_lock_mute
+27.1  tasto m giu
+27.2  tasto m su
+27.3  tasto ctrl giu
+27.3  tasto l giu
+27.4  tasto l su
+27.4  tasto ctrl su
+27.5  tasto w giu
+27.6  tasto w su
+27.7  controlla CUTOFF = 77
+27.7  controlla LOCK = 0
+27.7  controlla MUTE = 0
+# V = VISUAL
+27.9  tasto v giu
+28.0  tasto v su
+28.5  foto  tastiera_visual
+28.5  controlla VISUAL = 1
+28.7  tasto v giu
+28.8  tasto v su
+29.0  controlla VISUAL = 0
+# F1 = GUIDE, Giu' sceglie, Esc chiude; Tab = GUIDE
+29.1  tasto f1 giu
+29.2  tasto f1 su
+29.3  tasto giu giu
+29.4  tasto giu su
+29.5  foto  tastiera_guida
+29.5  controlla GUIDE = 1
+29.5  tasto esc giu
+29.6  tasto esc su
+29.7  tasto w giu
+29.8  tasto w su
+29.9  controlla CUTOFF = 78
+29.9  controlla GUIDE = 0
+29.9  tasto tab giu
+30.0  tasto tab su
+30.1  tasto w giu
+30.2  tasto w su
+30.3  controlla CUTOFF = 78
+30.3  controlla GUIDE = 1
+30.3  tasto tab giu
+30.4  tasto tab su
+# Ctrl + S = SALVA: la GUIDE su SAVE SCENE, Invio conferma, Esc chiude
+30.5  tasto ctrl giu
+30.5  tasto s giu
+30.6  tasto s su
+30.6  tasto ctrl su
+30.9  tasto invio giu
+31.0  tasto invio su
+31.3  foto  tastiera_salva
+31.3  controlla CUTOFF = 78
+31.3  controlla GUIDE = 1
+31.3  tasto esc giu
+31.4  tasto esc su
+31.5  tasto w giu
+31.6  tasto w su
+31.7  controlla CUTOFF = 79
+31.7  controlla GUIDE = 0
+# HOLD acceso e TAIL mosso: HOLD e' spento e TAIL resta dove l'hai messo; H dopo = di nuovo 99, poi 98
+32.0  tasto h giu
+32.1  tasto h su
+32.2  controlla HOLD = 1
+32.2  tasto shift giu
+32.2  tasto 4 giu
+32.3  tasto 4 su
+32.3  tasto shift su
+32.4  tasto a giu
+32.5  tasto a su
+32.6  controlla TAIL = 98
+32.6  controlla HOLD = 0
+32.6  tasto h giu
+32.7  tasto h su
+32.8  controlla TAIL = 99
+32.8  tasto h giu
+32.9  tasto h su
+33.0  controlla TAIL = 98
+33.0  controlla HOLD = 0
+33.5  controlla livello > 0.01
+33.5  fine

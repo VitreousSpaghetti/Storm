@@ -1,0 +1,236 @@
+# Mouse (standard/mouse/mouse.md): pagine fisse e temporanee, trascina (anche con Shift), rotella,
+# doppio clic, scelte, menu del tasto destro, pulsanti della testata (LOCK tenuto 1 s), striscia di
+# PLAY, GUIDE, salvare e richiamare una scena, EDIT, TAP. Coordinate in pixel del disegno (320x256).
+# Posizioni: pannelli a riposo SOURCES 49,81  SHAPE 123,81  LAYERS 197,81  SPACE 271,81  MOTION
+# 128,141  MIX 275,141; pannello davanti: manopole 1-4 a destra (250, 80 / 103 / 126 / 148);
+# pagine in basso: righe y 174 (SHAPE OSC GRAIN NOTE), 188 (LAYERS OSC B TEXTURE), 202 (MIX MOD A
+# MOD B MOD C SPACE), 216 (MACROS SEQ PULSE CLOCK SCENE EDIT); in cima VISUAL 190,7  GUIDE 240,7
+# LOCK 284,7; riga della nota PLAY 140,20  FREEZE 190,20  MUTE 240,20  HOLD 283,20.
+# secondi  dispositivo  evento
+# Il mouse entra: compaiono pulsanti, pagine e aiuto; passaggio su SOURCES = aiuto in basso
+0.5   mouse muovi 49 81
+1.0   foto  mouse_aiuto
+# Clic su un pannello = pagina fissa; clic sul pannello davanti = chiude
+1.2   mouse giu 49 81
+1.3   mouse su
+1.8   controlla pagina 1 = OSC
+2.0   mouse giu 80 100
+2.1   mouse su
+2.6   controlla pagina 1 = SHAPE
+# Clic tenuto = temporanea: LAYERS finche' tieni
+3.0   mouse giu 197 81
+3.6   controlla pagina 1 = LAYERS
+3.8   mouse su
+4.3   controlla pagina 1 = SHAPE
+# SHAPE (pagina a riposo) davanti con un clic; trascina CUTOFF: 1 pixel = 1 passo (aprire il filtro)
+4.5   mouse giu 123 81
+4.6   mouse su
+5.4   controlla CUTOFF = 45
+5.5   mouse giu 250 80
+5.6   mouse muovi 250 70
+5.7   mouse muovi 250 60
+5.8   mouse su
+6.0   controlla CUTOFF = 65
+# Shift = fine: 4 pixel = 1 passo (Shift dalla tastiera, come un tasto vero)
+6.1   tasto shift giu
+6.2   mouse giu 250 80
+6.3   mouse muovi 250 72
+6.4   mouse su
+6.5   tasto shift su
+6.6   controlla CUTOFF = 67
+# Rotella: 1 scatto = 1 passo, con Shift 10
+6.7   mouse rotella 250 80 3
+6.9   controlla CUTOFF = 70
+6.9   tasto shift giu
+7.0   mouse rotella 250 80 -1
+7.1   tasto shift su
+7.2   controlla CUTOFF = 60
+# Doppio clic = valore iniziale
+7.4   mouse giu 250 80
+7.45  mouse su
+7.6   mouse giu 250 80
+7.65  mouse su
+7.9   controlla CUTOFF = 45
+# Scelta: clic = etichetta dopo (MODE: LP -> BP), rotella indietro
+8.0   mouse giu 250 126
+8.05  mouse su
+8.3   controlla MODE = 1
+8.4   mouse rotella 250 126 -1
+8.6   controlla MODE = 0
+# Tasto destro = menu LEARN / CLEAR / DEFAULT (LEARN e CLEAR grigi senza MIDI); DEFAULT
+8.8   mouse giu 250 103
+8.9   mouse muovi 250 93
+9.0   mouse su
+9.1   controlla RES = 40
+9.2   mouse destro 250 103
+9.3   mouse muovi 280 130
+9.5   foto  mouse_menu
+9.6   mouse giu 280 130
+9.65  mouse su
+9.9   controlla RES = 30
+# Clic fuori dai pannelli = riposo
+10.0  mouse giu 8 120
+10.05 mouse su
+10.4  controlla pagina 1 = SHAPE
+# Pagine in basso: MOD B fissa, trascina DEPTH (accendere una MOD), WAVE con un clic
+10.6  mouse giu 130 202
+10.65 mouse su
+11.0  controlla pagina 2 = MOD B
+11.1  mouse giu 250 103
+11.2  mouse muovi 250 83
+11.3  mouse muovi 250 73
+11.4  mouse su
+11.5  controlla DEPTH_B = 55
+11.6  mouse giu 250 126
+11.65 mouse su
+11.9  controlla WAVE_B = 4
+# Clic di nuovo sulla stessa pagina = chiusa
+12.0  mouse giu 130 202
+12.05 mouse su
+12.4  controlla pagina 2 = MIX
+# Cambiare nota: pagina NOTE, ROOT con un clic (scelta), poi con la striscia di PLAY
+12.6  mouse giu 175 174
+12.65 mouse su
+12.9  controlla pagina 1 = NOTE
+13.0  mouse giu 250 80
+13.05 mouse su
+13.3  controlla ROOT = 1
+13.4  mouse giu 175 174
+13.45 mouse su
+13.8  controlla pagina 1 = SHAPE
+# PLAY: striscia di un'ottava; clic sul DO = nota, OCT+ = ottava su
+14.0  mouse giu 140 20
+14.05 mouse su
+14.3  controlla PLAY = 1
+14.4  mouse giu 123 174
+14.45 mouse su
+14.7  controlla ROOT = 3
+14.8  mouse giu 280 180
+14.85 mouse su
+15.1  controlla OCTAVE = 2
+# Tenuto nella meta' alta di un tasto = SWELL finche' tieni (foto: tasto MI tenuto)
+15.2  mouse giu 187 174
+16.2  foto  mouse_striscia
+16.3  mouse su
+16.5  controlla ROOT = 7
+16.6  mouse giu 50 180
+16.65 mouse su
+16.9  controlla OCTAVE = 1
+17.0  mouse giu 140 20
+17.05 mouse su
+17.3  controlla PLAY = 0
+# Pulsanti: FREEZE, HOLD, MUTE (di nuovo = spenti)
+17.4  mouse giu 190 20
+17.45 mouse su
+17.6  controlla FREEZE = 1
+17.7  mouse giu 190 20
+17.75 mouse su
+17.9  controlla FREEZE = 0
+18.0  mouse giu 283 20
+18.05 mouse su
+18.2  controlla HOLD = 1
+18.2  controlla TAIL = 99
+18.3  mouse giu 283 20
+18.35 mouse su
+18.5  controlla HOLD = 0
+18.5  controlla TAIL = 60
+18.6  mouse giu 240 20
+18.65 mouse su
+18.8  controlla MUTE = 1
+18.9  mouse giu 240 20
+18.95 mouse su
+19.1  controlla MUTE = 0
+# LOCK: un clic breve non basta; tenuto 1 s si'. Bloccato: le pagine non si aprono, MUTE si';
+# tenuto di nuovo 1 s = sbloccato
+19.2  mouse giu 284 7
+19.5  mouse su
+19.7  controlla LOCK = 0
+19.8  mouse giu 284 7
+20.6  mouse muovi 284 7
+20.6  foto  mouse_lock_tenuto
+21.0  mouse su
+21.2  controlla LOCK = 1
+21.3  mouse giu 49 81
+21.35 mouse su
+21.6  controlla pagina 1 = SHAPE
+21.7  mouse giu 240 20
+21.75 mouse su
+21.9  controlla MUTE = 1
+22.0  mouse giu 240 20
+22.05 mouse su
+22.2  controlla MUTE = 0
+22.3  mouse giu 284 7
+23.5  mouse su
+23.7  controlla LOCK = 0
+# VISUAL: pulsante in cima, un clic ovunque torna ai pannelli
+23.8  mouse giu 190 7
+23.85 mouse su
+24.1  controlla VISUAL = 1
+24.3  mouse giu 160 128
+24.35 mouse su
+24.6  controlla VISUAL = 0
+# Salvare una scena: GUIDE > SAVE SCENE, posto 3 (clic = sceglie, di nuovo = salva), BACK chiude
+24.8  mouse giu 240 7
+24.85 mouse su
+25.1  controlla GUIDE = 1
+25.2  mouse giu 60 206
+25.25 mouse su
+25.6  mouse giu 170 128
+25.65 mouse su
+26.0  mouse giu 170 128
+26.05 mouse su
+26.3  mouse muovi 170 128
+26.4  foto  mouse_guida_salva
+26.5  mouse giu 70 248
+26.55 mouse su
+26.8  controlla GUIDE = 0
+# Il suono cambia (CUTOFF), poi pagina SCENE: MORPH a 2 S con la rotella, GO = torna alla scena 3
+27.0  mouse giu 123 81
+27.05 mouse su
+27.3  mouse rotella 250 80 20
+27.5  controlla CUTOFF = 65
+27.6  mouse giu 240 216
+27.65 mouse su
+27.9  controlla pagina 2 = SCENE
+28.0  mouse rotella 250 103 -2
+28.2  controlla MORPH = 0
+28.3  mouse muovi 250 80
+28.4  foto  mouse_scene
+28.5  mouse giu 270 126
+28.55 mouse su
+31.0  controlla CUTOFF = 45
+# Aprire e chiudere la GUIDE: clic sulla voce scelta = OK, CLOSE chiude; poi GUIDE e di nuovo GUIDE
+31.2  mouse giu 240 7
+31.25 mouse su
+31.5  mouse giu 60 230
+31.55 mouse su
+31.8  mouse giu 60 230
+31.85 mouse su
+32.1  controlla GUIDE = 0
+32.2  mouse giu 240 7
+32.25 mouse su
+32.5  controlla GUIDE = 1
+32.6  mouse giu 240 7
+32.65 mouse su
+32.9  controlla GUIDE = 0
+# EDIT: clic su un posto lo sceglie, trascina la quantita'; CLOCK: due clic su TAP a 0,5 s = 120 BPM
+33.0  mouse giu 280 216
+33.05 mouse su
+33.3  controlla pagina 2 = EDIT
+33.4  mouse giu 250 126
+33.45 mouse su
+33.7  mouse giu 290 126
+33.8  mouse muovi 290 116
+33.9  mouse su
+34.1  mouse muovi 250 126
+34.2  foto  mouse_edit
+34.3  mouse giu 193 216
+34.35 mouse su
+34.6  controlla pagina 2 = CLOCK
+34.7  mouse giu 250 148
+34.75 mouse su
+35.2  mouse giu 250 148
+35.25 mouse su
+35.5  controlla BPM = 80
+36.0  controlla livello > 0.05
+36.0  fine

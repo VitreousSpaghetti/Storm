@@ -1,0 +1,190 @@
+// Generato da script/prepara.py da script/testi.txt: correggere li', non qui.
+#define N_GUIDA 16
+#define G_SIGNAL_PATH 0
+#define G_KEYS 1
+#define G_SOURCES 2
+#define G_SHAPE 3
+#define G_LAYERS 4
+#define G_MOTION 5
+#define G_SEQ 6
+#define G_PLAY 7
+#define G_SPACE 8
+#define G_MACROS 9
+#define G_VISUAL 10
+#define G_TUTORIAL 11
+#define G_RESET_SOUND 12
+#define G_SAVE_PATCH 13
+#define G_LOAD_PATCH 14
+#define G_CLOSE 15
+static const char *const guida_voce[N_GUIDA] = { "SIGNAL PATH", "KEYS", "SOURCES", "SHAPE", "LAYERS", "MOTION", "SEQ", "PLAY", "SPACE", "MACROS", "VISUAL", "TUTORIAL", "RESET SOUND", "SAVE PATCH", "LOAD PATCH", "CLOSE" };
+static const char *const guida_testo[N_GUIDA] = {
+	"THE SOUND FLOWS LEFT TO" "\n"
+	"RIGHT: SOURCES MAKE THE" "\n"
+	"TONE, SHAPE FILTERS IT," "\n"
+	"LAYERS ADD VOICES, SPACE" "\n"
+	"PUTS IT IN A ROOM." "\n"
+	"MOTION TURNS KNOBS BY" "\n"
+	"ITSELF. A MACRO TURNS" "\n"
+	"MANY KNOBS AT ONCE.",
+	"> PAD 1 START: MUTE (FADE)" "\n"
+	"> PAD 1 SELECT TAP: PLAY" "\n"
+	"> PAD 1 SELECT HOLD: OSC B" "\n"
+	"> PAD 2 START TAP: FREEZE" "\n"
+	"> PAD 2 START HOLD: SCENES" "\n"
+	"> PAD 2 SELECT HOLD: MACROS" "\n"
+	"> START+SELECT STORM GUIDE" "\n"
+	"> PAD 1 START+\x82"" 2 S: LOCK" "\n"
+	"> START+R1 L1: TUTORIAL",
+	"ONE OSCILLATOR, 4 WAVES:" "\n"
+	"SINE, SQUARE, SAW, SUB." "\n"
+	"OSC B: FM AND AM. FOLD" "\n"
+	"BENDS THE WAVE. TEXTURE:" "\n"
+	"THUMP ON PULSE 1, WIND," "\n"
+	"PEDAL (SUB OR LAYERS STAY" "\n"
+	"ON THE ROOT), FINE TUNE." "\n"
+	"> \x82"" OSC \x83"" GRAIN \x84"" NOTE" "\n"
+	"> SELECT OSC B  +\x82"" TEXTURE",
+	"A FILTER. CUTOFF: HOW" "\n"
+	"BRIGHT. RES: IT SINGS AT" "\n"
+	"THE CUTOFF. DRIVE: GRIT." "\n"
+	"MODE: LOW, BAND OR HIGH" "\n"
+	"PASS (LP BP HP)." "\n"
+	"> PAD 1, NO KEYS HELD:" "\n"
+	"> \x80"" CUTOFF \x81"" RES" "\n"
+	"> L1R1 MODE L2R2 DRIVE",
+	"FOUR MORE VOICES, ONE" "\n"
+	"OCTAVE UP, A BIT OUT OF" "\n"
+	"TUNE: THEY BEAT, SHIMMER." "\n"
+	"BELLS: THE PS1 SHAKES" "\n"
+	"EACH VOICE (METAL GLINTS)." "\n"
+	"COLOR: FROM DARK TO AIR." "\n"
+	"CHORD: WHICH NOTES." "\n"
+	"> PAD 1: HOLD \x85"" LAYERS" "\n"
+	"> PAD 2: L1R1 LEVEL",
+	"3 HANDS TURN KNOBS FOR" "\n"
+	"YOU, NEVER IN TIME: SIN," "\n"
+	"TRI, BREATH, RANDOM, NOISE." "\n"
+	"DEPTH: HOW MUCH. DEST: A" "\n"
+	"KNOB, PITCH, PAN, A MACRO," "\n"
+	"OR DEPTH OR RATE OF" "\n"
+	"ANOTHER HAND." "\n"
+	"> PAD 2: HOLD \x82"" \x83"" \x84""" "\n"
+	"> MOD A B C  START FREEZE",
+	"THE NOTE MOVES BY ITSELF" "\n"
+	"ON A SCALE: ONE STEP" "\n"
+	"EVERY 1-16 BEATS. MUTATE:" "\n"
+	"HOW OFTEN IT CHANGES." "\n"
+	"PULSE: TWO RHYTHMS. A MOD" "\n"
+	"WITH WAVE PULSE1 OR 2." "\n"
+	"> PAD 2: HOLD SELECT +" "\n"
+	"> \x82"" SEQ \x83"" PULSE \x84"" CLOCK" "\n"
+	"> \x84"": L1R1 NUDGE L2R2 TAP",
+	"SELECT ON PAD 1: PLAY ON" "\n"
+	"OR OFF. THE D-PAD PLAYS:" "\n"
+	"> \x80"" UP SWELL, DOWN SINK" "\n"
+	"> \x81"" NOTE ON THE SCALE" "\n"
+	"> L1R1 OCTAVE L2R2 CHORD" "\n"
+	"SWELL AND SINK PUSH" "\n"
+	"MACRO 1 AND 2 WHILE HELD.",
+	"WIDE SPREADS THE LAYERS" "\n"
+	"LEFT AND RIGHT (PAST 50:" "\n"
+	"WIDER THAN THE SPEAKERS)." "\n"
+	"REVERB IS THE ROOM, TAIL" "\n"
+	"HOW LONG IT RINGS, DAMP" "\n"
+	"MAKES IT DARKER." "\n"
+	"TAIL 99 = HOLD: IT STAYS." "\n"
+	"> PAD 2: HOLD \x85"" SPACE" "\n"
+	"> PAD 2: \x81"" REVERB",
+	"ONE KNOB TURNS 4 KNOBS," "\n"
+	"EACH UP OR DOWN BY ITS" "\n"
+	"OWN AMOUNT (-9 TO +9)." "\n"
+	"RISE DEEP UNREST HAZE." "\n"
+	"A MOD CAN TURN A MACRO:" "\n"
+	"THE DRONE PLAYS ITSELF." "\n"
+	"> PAD 2: HOLD SELECT" "\n"
+	"> SELECT+\x85"": EDIT",
+	"A STORM AT SEA, FROM THE" "\n"
+	"BOW OF A FISHING BOAT." "\n"
+	"EVERY KNOB MOVES IT: NOISE" "\n"
+	"RAIN, CUT LIGHT, FM BOLTS," "\n"
+	"FOLD FOAM, SUB SWELL," "\n"
+	"MACROS THE HURRICANE." "\n"
+	"HOLD A PAGE: VALUES SHOW." "\n"
+	"> START+SELECT TAP: STORM" "\n"
+	"> HOLD 1 S: THIS GUIDE",
+	"BUILDS A DRONE FROM A" "\n"
+	"PLAIN SINE, ONE STEP AT" "\n"
+	"A TIME, AND WAITS FOR YOU." "\n"
+	"START+R1 SKIPS A STEP," "\n"
+	"START+L1 GOES BACK." "\n"
+	"> \x82"" START",
+	"PUTS EVERY KNOB, MACRO" "\n"
+	"AND MOD BACK TO THE" "\n"
+	"START SOUND." "\n"
+	"> \x82"" RESET",
+	"KEEPS YOUR SOUND ON THE" "\n"
+	"MEMORY CARD IN PORT 1." "\n"
+	"> \x81"" SLOT  \x82"" SAVE",
+	"BRINGS BACK A SOUND," "\n"
+	"GLIDING (MORPH TIME)." "\n"
+	"LIVE: HOLD PAD 2 START." "\n"
+	"> \x81"" SLOT  \x82"" LOAD",
+	"CLOSES THE GUIDE." "\n"
+	"THE SOUND NEVER STOPPED." "\n"
+	"> \x82"" OR \x84""",
+};
+static const char tut_conferma[] = "THE SOUND RESTARTS FROM" "\n" "A PLAIN SINE." "\n" "> \x82"" YES  \x84"" NO";
+static const char tut_attivo[] = "THE TUTORIAL IS RUNNING." "\n" "QUIT: THE SOUND STAYS" "\n" "AS IT IS NOW." "\n" "> \x82"" QUIT TUTORIAL" "\n" "> \x84"" BACK TO THE GUIDE";
+static const char tut_resetconf[] = "SURE? EVERY CHANGE" "\n" "IS LOST." "\n" "> \x82"" YES  \x84"" NO";
+static const char tut_overwrite[] = "THIS SLOT IS FULL:" "\n" "OVERWRITE IT?" "\n" "> \x82"" YES  \x84"" NO";
+#define N_PASSI 23
+static const char *const passo_fai[N_PASSI] = {
+	"THIS IS A PLAIN SINE: THE START." "\n" "START+R1 GOES ON, START+L1 BACK.",
+	"HOLD \x82"" ON PAD 1 AND" "\n" "RAISE SQUARE WITH \x81"".",
+	"HOLD \x82"" ON PAD 1 AND" "\n" "RAISE SUB WITH R2.",
+	"HOLD \x83"" ON PAD 1 AND" "\n" "RAISE FOLD WITH \x80"".",
+	"HOLD SELECT ON PAD 1 AND" "\n" "RAISE FM WITH \x80"".",
+	"NO KEYS HELD: LOWER THE" "\n" "CUTOFF WITH \x80"" (DOWN).",
+	"NO KEYS HELD: RAISE RES" "\n" "WITH \x81"" (RIGHT).",
+	"HOLD \x82"" ON PAD 2: MOD A." "\n" "RAISE DEPTH WITH \x81"".",
+	"HOLD \x83"" ON PAD 2: MOD B IS" "\n" "RANDOM. RAISE DEPTH WITH \x81"".",
+	"HOLD \x84"" ON PAD 2: MOD C." "\n" "PRESS L2 UNTIL DEST IS VOLUME.",
+	"PAD 2, NO KEYS HELD:" "\n" "RAISE LAYERS WITH R1.",
+	"HOLD \x85"" ON PAD 1 AND" "\n" "RAISE DETUNE WITH \x80"".",
+	"HOLD \x85"" ON PAD 1 AND" "\n" "RAISE BELLS WITH \x81"".",
+	"PAD 2, NO KEYS HELD:" "\n" "RAISE REVERB WITH \x81"".",
+	"HOLD \x85"" ON PAD 2 AND" "\n" "RAISE WIDE WITH \x80"".",
+	"HOLD \x85"" ON PAD 2 AND" "\n" "RAISE DAMP WITH R2.",
+	"PAD 2, NO KEYS HELD:" "\n" "RAISE MACRO 1 WITH \x80"".",
+	"HOLD SELECT ON PAD 2:" "\n" "RAISE MACRO 2 WITH \x81"".",
+	"HOLD SELECT, THEN \x85"", PAD 2:" "\n" "SLOT 1 BELOW ZERO WITH \x81"".",
+	"HOLD SELECT+\x82"" ON PAD 2 (SEQ):" "\n" "RAISE STEPS WITH \x80"".",
+	"HOLD \x82"" ON PAD 2 (MOD A):" "\n" "WAVE PULSE1 WITH R1.",
+	"TAP SELECT ON PAD 1 (PLAY)," "\n" "THEN HOLD \x80"" UP: SWELL.",
+	"DONE: THE DRONE IS YOURS." "\n" "START+R1 TO FINISH.",
+};
+static const char *const passo_senti[N_PASSI] = {
+	"",
+	"ODD HARMONICS: A HOLLOW," "\n" "FULLER SOUND.",
+	"ONE OCTAVE DOWN:" "\n" "THE DRONE GETS A FLOOR.",
+	"THE WAVE FOLDS ONTO ITSELF:" "\n" "THAT IS THE GRAIN.",
+	"ONE OSCILLATOR SHAKES THE" "\n" "OTHER: METALLIC TONES.",
+	"THE FILTER TAKES AWAY" "\n" "THE HIGHS: DARKER.",
+	"THE FILTER SINGS AT" "\n" "THE CUTOFF.",
+	"THE FILTER OPENS AND CLOSES" "\n" "BY ITSELF: IT BREATHES.",
+	"SMOOTH RANDOM ON THE FOLD:" "\n" "NEVER THE SAME TWICE.",
+	"A SLOW BREATH ON THE VOLUME.",
+	"FOUR MORE VOICES:" "\n" "THE SOUND GETS WIDER.",
+	"THE VOICES BEAT: SHIMMER.",
+	"THE PS1 SHAKES EACH" "\n" "VOICE: METAL GLINTS.",
+	"A HUGE ROOM:" "\n" "THE TAILS PILE UP.",
+	"THE LAYERS SPREAD LEFT" "\n" "AND RIGHT.",
+	"THE TAIL LOSES ITS HIGHS:" "\n" "WARMER.",
+	"ONE KNOB: FILTER, FOLD, FM" "\n" "GO UP, REVERB GOES DOWN.",
+	"EVERY MACRO TURNS ITS" "\n" "OWN FOUR KNOBS.",
+	"NOW MACRO 1 CLOSES THE" "\n" "FILTER WHILE IT ADDS GRAIN.",
+	"THE NOTE MOVES BY ITSELF," "\n" "ONE STEP EVERY FEW BEATS.",
+	"THE FILTER PULSES IN TIME:" "\n" "A EUCLIDEAN RHYTHM.",
+	"YOU PLAY THE DRONE: \x81"" NOTE," "\n" "L1R1 OCTAVE, L2R2 CHORD.",
+	"",
+};
