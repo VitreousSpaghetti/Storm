@@ -7,6 +7,9 @@ English translation of [LEGGIMI.md](LEGGIMI.md). The linked documents in `standa
 File names, test events and MIDI map keywords (`tasto`, `controlla`, `zona`, `spento`...) are the
 real ones the program reads, so they stay as they are.
 
+The executables for Windows, macOS and Linux can be downloaded from
+<https://github.com/VitreousSpaghetti/Storm/releases>.
+
 ## Folders
 | Folder | Contents |
 |---|---|

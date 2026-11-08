@@ -4,6 +4,9 @@ Versione per computer di **storm**, il synth per drone nato per la PS1 PAL. Si s
 **tastiera MIDI**, con il **mouse**, con la tastiera del PC o con uno o due gamepad, su
 **Windows, macOS e Linux**.
 
+Gli eseguibili per Windows, macOS e Linux si scaricano da
+<https://github.com/VitreousSpaghetti/Storm/releases>.
+
 ## Cartelle
 | Cartella | Contenuto |
 |---|---|
