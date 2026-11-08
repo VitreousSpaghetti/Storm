@@ -150,4 +150,10 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: |
           (cd storm-windows && zip -r ../storm-windows.zip .)
-          gh release create "$GITHUB_REF_NAME" --generate-notes storm-windows.zip storm-macos/storm-macos.zip storm-linux-x86_64/storm-linux-x86_64.tar.gz
+          file="storm-windows.zip storm-macos/storm-macos.zip storm-linux-x86_64/storm-linux-x86_64.tar.gz"
+          # release gia' presente (es. creata dal sito, che crea anche il tag): si aggiornano solo i file
+          if gh release view "$GITHUB_REF_NAME" > /dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" $file --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" --generate-notes $file
+          fi
