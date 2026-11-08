@@ -15,6 +15,34 @@ quello dell'audio.
 | `SCENA` | 1-8 | Va alla scena (morph col tempo della scena) |
 | `SPECIALE` | nome, `cambia` / `acceso` / `spento` | Azione propria del synth (tabella sotto). Senza il secondo argomento vale `cambia` |
 
+## Azioni speciali comuni
+Alcune azioni speciali hanno lo stesso nome e lo stesso significato in ogni synth che le ha. Sono
+tutte **facoltative** (dalla 0.8): un synth che non ha una cosa non ha nemmeno la sua azione.
+
+| Nome | Tipo | Cosa fa | Se il synth non ce l'ha |
+|---|---|---|---|
+| `MUTE` | interruttore | Toglie il suono | il tasto non fa niente |
+| `PLAY` | interruttore | Le coppie del pad e della tastiera diventano gesti (storm) | il tasto non fa niente |
+| `GUIDE` | interruttore | Apre la guida | F1 / Tab non fanno niente |
+| `LOCK` | interruttore | Blocca i comandi (passano solo `MUTE` e `LOCK`) | Ctrl+L non fa niente |
+| `AVVIA` | interruttore | Acceso = la sequenza gira, spento = si ferma (dalla 0.8). Per i synth che hanno una sequenza da fermare; un drone non ce l'ha | Spazio resta libero per un'altra azione del synth |
+| `SALVA` | azione secca | Salva la scena (vedi [scene.md](scene.md)) | Ctrl+S non fa niente |
+| `AVANTI` / `INDIETRO` | azione secca | Passo dopo / prima del TUTORIAL | PagGiu' / PagSu' non fanno niente |
+
+- Anche le scene, il TUTORIAL e il VOLUME sono facoltativi. Senza scene `SCENA`, `SALVA` e il
+  program change non fanno niente.
+- **L'interruttore che tiene**: se il synth ha un interruttore che "tiene" il suono o il giro
+  (storm: `HOLD`, la coda del riverbero ferma; un synth a sequenza: il giro che si ripete), e' lui
+  che va sul pedale sustain (CC 64) e sul tasto H. Dalla 0.8.
+
+## Tasti del PC delle azioni speciali
+Dalla 0.8 i tasti del PC delle azioni speciali li da' **il synth**, come elenco `tasto -> azione`,
+insieme alla sua tabella delle azioni. Restano dello standard, uguali per tutti, solo i tasti
+riservati: F1 / Tab = `GUIDE`, F11 = tutto schermo, Esc, Ctrl+S = `SALVA`, Ctrl+Q = esci,
+Ctrl+L = `LOCK`, PagSu' / PagGiu' = `INDIETRO` / `AVANTI` (vedi
+[../tastiera/tastiera.md](../tastiera/tastiera.md)). Storm da' i suoi tasti di oggi (tabella
+sotto): il suo comportamento non cambia.
+
 ## Azioni speciali di storm
 | Nome | Pad PS1 | Tastiera PC | Mouse | MIDI predefinito |
 |---|---|---|---|---|
@@ -30,7 +58,7 @@ quello dell'audio.
 | `INDIETRO` (passo prima del TUTORIAL) | Start + L1 | PagSu' | pulsante `<` nella testata del tutorial | solo dalla mappa (`zona N = INDIETRO`) |
 
 ### Interruttori e azioni secche
-- Un **interruttore** (MUTE, PLAY, FREEZE, VISUAL, GUIDE, LOCK, HOLD) ha uno stato acceso/spento.
+- Un **interruttore** (MUTE, PLAY, FREEZE, VISUAL, GUIDE, LOCK, HOLD, AVVIA) ha uno stato acceso/spento.
   Tasto del PC, tasto del pad e clic mandano `cambia`. Un comando che si tiene giu' (pedale
   sustain, nota della zona comandi tenuta) manda `acceso` quando si preme e `spento` quando si
   lascia.
@@ -64,4 +92,7 @@ pad, tastiera, mouse o MIDI. Dalla 0.5.
 
 Un nuovo synth riempie questa tabella con le sue azioni; le colonne (i dispositivi) restano
 uguali, e i tasti gia' usati qui (M, P, Spazio, V, F1, H, Ctrl+L, Ctrl+S) mantengono lo stesso
-significato quando il synth ha un'azione simile.
+significato quando il synth ha un'azione simile. Una sola eccezione (dalla 0.8): nei synth che
+hanno `AVVIA`, Spazio = `AVVIA` (e' il tasto play / stop di ogni sequencer); storm, che non ha una
+sequenza da fermare, tiene Spazio = `FREEZE`. Un esempio completo di un altro synth e' in
+[../esempi/nucleo.md](../esempi/nucleo.md).

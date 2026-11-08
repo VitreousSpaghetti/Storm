@@ -43,7 +43,20 @@ Il lato su cui agiscono le manopole e' quello dell'ultima pagina aperta (mostrat
 ## Azioni speciali
 Vedi la tabella in [../controlli/azioni.md](../controlli/azioni.md). Tasti riservati per tutti i
 synth: F1/Tab = GUIDE, F11 = tutto schermo, Esc = chiudi pagina o menu, Ctrl+S = salva scena,
-Ctrl+Q / Cmd+Q = esci (chiede conferma se c'e' qualcosa di non salvato).
+Ctrl+Q / Cmd+Q = esci (chiede conferma se c'e' qualcosa di non salvato), Ctrl+L = LOCK,
+PagSu' / PagGiu' = `INDIETRO` / `AVANTI`. Se il synth non ha l'azione (niente GUIDE, niente
+scene...), il tasto non fa niente.
+
+Dalla 0.8 gli **altri** tasti delle azioni speciali li da' il synth (elenco `tasto -> azione`):
+- non puo' usare i tasti riservati, i numeri delle pagine (1-9, 0, `-`), i tasti delle manopole
+  (frecce, W S D A E Q R F) e Invio; con Ctrl + una lettera che non e' di una manopola (es.
+  Ctrl+I) il tasto non e' mai "un passo solo" di qualcosa;
+- tiene i tasti di storm quando ha un'azione simile: M = `MUTE`, P = `PLAY`, V = `VISUAL`,
+  H = l'interruttore che tiene (storm `HOLD`);
+- **Spazio**: nei synth che hanno `AVVIA` (una sequenza da fermare) Spazio = `AVVIA`; storm, che
+  non ha una sequenza, tiene Spazio = `FREEZE`.
+
+Storm da' i tasti di oggi (M, P, Spazio, V, H): il suo comportamento non cambia.
 
 | Tasto | Nei menu (GUIDE e simili) | Fuori dai menu |
 |---|---|---|

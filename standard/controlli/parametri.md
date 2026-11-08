@@ -37,6 +37,16 @@ Regole:
   altre pagine.
 - Il valore che **suona** (manopola + macro + modulazioni) e' diverso da quello impostato: lo
   schermo li mostra entrambi; mouse e MIDI cambiano sempre quello impostato.
+- **Gamma che dipende da un altro parametro** (dalla 0.8, precisazione): `min` e `max` sono la
+  gamma piu' larga. Il synth puo' stringere il valore secondo un altro parametro (es. un ritmo
+  euclideo: i colpi non superano i passi) e lo scrive nelle note della sua tabella. `VALORE` si
+  porta prima tra `min` e `max`, poi il synth stringe; il soft takeover del MIDI guarda il valore
+  stretto. La parte della manopola oltre il limite di adesso non fa niente.
+- **Precisione interna piu' fine** (dalla 0.8, precisazione): `min` e `max` sono la gamma della
+  manopola, un passo = un intero. Un synth che tiene dentro una risoluzione piu' fine (es. il BPM in
+  decimi) la cambia solo con cio' che non passa dalla tabella (tap, clock, levette del pad nativo)
+  e puo' mostrarla a schermo. Anche il numero a schermo lo sceglie il synth (es. FINE di storm,
+  o una manopola 0-112 mostrata 0-99): mouse, MIDI e prove usano sempre il valore della tabella.
 
 ## Documentazione generata
 Il programma stampa la sua tabella in Markdown con `--parametri` (vedi [../prove/](../prove/)).

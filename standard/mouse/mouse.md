@@ -21,7 +21,7 @@ usare le azioni speciali, la GUIDE, salvare e richiamare le scene, assegnare il 
 | Clic | su un pannello o sul nome di una pagina | Apre la sua pagina **fissa** (cornice gialla); clic di nuovo = chiude. Sul pannello della pagina a riposo: lo porta davanti fisso, di nuovo = torna a posto |
 | Clic tenuto | su un pannello o sul nome di una pagina | Pagina **temporanea** finche' tieni (come il pad). Clic = lasciato prima di 300 ms senza girare niente in mezzo, come il tocco della tastiera |
 | Clic | fuori dai pannelli | Come Esc: chiude le pagine fisse e si torna a riposo; nei menu (GUIDE) indietro di un livello. Lo sfondo di un menu o dell'aiuto non conta come "fuori" |
-| Trascina su/giu' | su una manopola | Alza/abbassa: 1 pixel del disegno = 1 passo; con **Shift** = fine (4 pixel = 1 passo) |
+| Trascina su/giu' | su una manopola | Alza/abbassa: tutta la gamma in circa 100 pixel del disegno (vedi sotto); con **Shift** = fine (4 volte piu' pixel per passo) |
 | Rotella | su una manopola | 1 scatto = 1 passo; con Shift = 10 passi |
 | Doppio clic | su una manopola | Torna al valore iniziale. Doppio clic = due clic sulla stessa zona entro 400 ms; un terzo clic non fa un altro doppio clic |
 | Clic | su una `scelta` | Etichetta successiva; dopo l'ultima si ricomincia dalla prima. Un pulsante che va in una sola direzione (es. `OCT-` / `OCT+`) si ferma agli estremi |
@@ -32,6 +32,11 @@ usare le azioni speciali, la GUIDE, salvare e richiamare le scene, assegnare il 
 
 - Durante il trascinamento il puntatore resta fermo e nascosto (movimento relativo), cosi' non
   esce dalla finestra; al rilascio torna dove era.
+- Pixel per passo nel trascinamento (dalla 0.8): **100 / (max - min)**, parte intera, minimo 1.
+  Per una gamma 0-99 (tutti i `continuo` di storm) resta 1 pixel = 1 passo, con Shift 4 pixel,
+  come prima; per una gamma piccola i passi si allargano (0-8: 12 pixel a passo, 0-2: 50), cosi'
+  un valore si posa anche con la mano che trema. Un synth che lo usa non deve fare niente: il
+  traduttore lo ricava da `min` e `max`.
 - Il trascinamento di un parametro della tabella manda azioni `VALORE` (non `MANOPOLA`): niente
   scorrimento accelerato. Cio' che non e' nella tabella (selezione in un menu, quantita' di una
   macro) manda `MANOPOLA` del suo posto, un passo per pixel.
