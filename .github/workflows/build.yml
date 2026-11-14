@@ -69,7 +69,7 @@ jobs:
       # plugin: universali anche loro, firmati ad-hoc (senza firma macOS arm64 non li carica)
       - name: Plugin
         run: |
-          for p in build/plugin/CLAP/storm.clap build/plugin/VST3/storm.vst3; do
+          for p in build/plugin/storm.clap build/plugin/storm.vst3; do
             lipo "$p/Contents/MacOS/storm" -verify_arch arm64 x86_64
             codesign --force --sign - "$p"
             codesign -v "$p"
@@ -98,8 +98,8 @@ jobs:
         run: |
           mkdir storm
           ditto build/storm.app storm/storm.app
-          ditto build/plugin/CLAP/storm.clap storm/storm.clap
-          ditto build/plugin/VST3/storm.vst3 storm/storm.vst3
+          ditto build/plugin/storm.clap storm/storm.clap
+          ditto build/plugin/storm.vst3 storm/storm.vst3
           ditto -c -k --keepParent storm storm-macos.zip
       - uses: actions/upload-artifact@v4
         with:
@@ -139,7 +139,7 @@ jobs:
       # tar.gz: lo zip degli artefatti perderebbe il permesso di esecuzione. Exe e i due plugin
       # affiancati (ogni -C parte dalla cartella del -C prima)
       - name: Pacchetto
-        run: tar -czf storm-linux-x86_64.tar.gz -C build storm -C plugin/CLAP storm.clap -C ../VST3 storm.vst3
+        run: tar -czf storm-linux-x86_64.tar.gz -C build storm -C plugin storm.clap storm.vst3
       - uses: actions/upload-artifact@v4
         with:
           name: storm-linux-x86_64

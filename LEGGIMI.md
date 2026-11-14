@@ -86,7 +86,8 @@ La build fa anche storm come strumento per le DAW, con lo schermo PS1 e il mouse
 | CLAP (Bitwig, Reaper, FL Studio...) | `build\plugin\CLAP\storm.clap` | `C:\Program Files\Common Files\CLAP\` |
 | VST3 (Ableton, Cubase, Reaper...) | la cartella `build\plugin\VST3\storm.vst3` intera | `C:\Program Files\Common Files\VST3\` |
 
-Su macOS i due pacchetti vanno in `~/Library/Audio/Plug-Ins/CLAP/` e `.../VST3/`, su Linux in
+Su macOS e Linux la build li mette direttamente in `build/plugin/` (`storm.clap` e la cartella
+`storm.vst3`). Su macOS vanno in `~/Library/Audio/Plug-Ins/CLAP/` e `.../VST3/`, su Linux in
 `~/.clap/` e `~/.vst3/`.
 
 - **Finestra**: lo schermo 320x256 ingrandito (di base x3, si ridimensiona a multipli interi), col
