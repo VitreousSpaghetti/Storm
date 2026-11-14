@@ -23,6 +23,7 @@ static const Param *tab;
 static int          n_tab;
 
 void controlli_tabella(const Param *p, int n) { tab = p, n_tab = n; }
+const Param *controlli_parametri(int *n) { *n = n_tab; return tab; }
 
 const Param *controlli_param(const char *id)
 {
@@ -623,7 +624,7 @@ int controlli_mappa(const char *testo, const char *nome)
 
 // Riscrive la mappa dell'utente: le sue righe meno quelle dei CC cambiati, piu' le regole nuove.
 // File temporaneo + rinomina: un'interruzione a meta' non lascia un file mezzo scritto.
-static void salva_mappa(const int *cc, int n)
+static void scrivi_mappa(const int *cc, int n)
 {
 	if (!mappa_file)
 		return; // modo prova senza --mappa: il learn resta in memoria
@@ -654,6 +655,48 @@ static void salva_mappa(const int *cc, int n)
 		fprintf(stderr, "non riesco a scrivere la mappa MIDI %s: %s\n", mappa_file, SDL_GetError());
 		SDL_RemovePath(tmp); // la mappa vecchia resta com'era
 	}
+}
+
+// Plugin: il MIDI arriva nel thread audio, che non scrive file. Learn e CLEAR segnano solo i CC
+// cambiati; la mappa la scrive controlli_mappa_scrivi dal thread principale.
+static int           rimanda;
+static SDL_AtomicInt da_scrivere[4]; // 128 bit, uno per CC
+
+void controlli_mappa_rimanda(void) { rimanda = 1; }
+
+static void salva_mappa(const int *cc, int n)
+{
+	if (!rimanda) {
+		scrivi_mappa(cc, n);
+		return;
+	}
+	for (int i = 0; i < n; i++) {
+		SDL_AtomicInt *a = &da_scrivere[cc[i] >> 5];
+		int            v = SDL_GetAtomicInt(a);
+		while (!SDL_CompareAndSwapAtomicInt(a, v, (int) ((unsigned) v | 1u << (cc[i] & 31))))
+			v = SDL_GetAtomicInt(a);
+	}
+}
+
+int controlli_mappa_scrivi(uint8_t cambiati[128])
+{
+	int cc[128], n = 0;
+	for (int w = 0; w < 4; w++) {
+		unsigned b = (unsigned) SDL_SetAtomicInt(&da_scrivere[w], 0); // restituisce quelli di prima
+		for (int i = 0; i < 32; i++)
+			if (b >> i & 1)
+				cambiati[cc[n++] = w * 32 + i] = 1;
+	}
+	if (n)
+		scrivi_mappa(cc, n);
+	return n;
+}
+
+int controlli_regola_cc(int cc, char *t, int n)
+{
+	if (cc < 0 || cc > 127)
+		return 0;
+	return snprintf(t, (size_t) n, "cc %d = %s\n", cc, r_cc[cc].tipo == R_PARAM ? tab[r_cc[cc].n].id : "spento");
 }
 
 // CLEAR: nessun CC muove piu' il parametro i

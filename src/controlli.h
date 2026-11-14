@@ -26,6 +26,7 @@ typedef struct {
 
 void         controlli_tabella(const Param *p, int n); // la tabella resta del synth
 const Param *controlli_param(const char *id);          // NULL se l'id non c'e'
+const Param *controlli_parametri(int *n);               // tutta la tabella (per il plugin)
 void         controlli_stampa_parametri(void);          // in Markdown (--parametri)
 // Per il modo prova (controlla pagina, controlla degli interruttori), dal thread del synth: nome
 // della pagina aperta sul lato 0/1; stato di un'azione speciale con stato (0/1, -1 = non c'e')
@@ -130,6 +131,12 @@ void controlli_evento_midi(const uint8_t *m, int n, uint64_t ns);
 int  controlli_mappa(const char *testo, const char *nome);
 // File della mappa dell'utente, dove learn e CLEAR scrivono (NULL = le assegnazioni restano in memoria)
 void controlli_mappa_utente(const char *percorso);
+// Plugin (MIDI nel thread audio): learn e CLEAR non scrivono subito la mappa dell'utente ma segnano
+// i CC; controlli_mappa_scrivi (thread principale) la scrive e mette a 1 in cambiati quei CC.
+// controlli_regola_cc: la riga della mappa di un CC com'e' adesso ("cc 3 = CUTOFF" o "= spento").
+void controlli_mappa_rimanda(void);
+int  controlli_mappa_scrivi(uint8_t cambiati[128]);
+int  controlli_regola_cc(int cc, char *t, int n);
 // 1 = c'e' il MIDI (almeno una porta aperta, o il modo prova): LEARN e CLEAR si possono usare
 void controlli_midi_attivo(int si);
 int  controlli_midi(void);

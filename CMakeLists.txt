@@ -69,6 +69,84 @@ if(MINGW)
 	target_link_options(storm PRIVATE -static)
 endif()
 
+# Plugin CLAP e VST3 senza finestra (src/plugin.c). Il VST3 lo fa clap-wrapper sopra il CLAP.
+# Tutto scaricato per URL con l'impronta, come SDL3 e RtMidi; il VST3 SDK arriva a pezzi (i suoi
+# sottomoduli) nelle cartelle dove clap-wrapper li cerca. SOURCE_SUBDIR inesistente = solo scaricare.
+option(STORM_PLUGIN "anche il plugin CLAP e VST3" ON)
+if(STORM_PLUGIN)
+	set(VST3_TAG v3.8.0_build_66)
+	set(VST3_DIR ${FETCHCONTENT_BASE_DIR}/vst3sdk-src)
+	FetchContent_Declare(clap
+		URL https://github.com/free-audio/clap/archive/refs/tags/1.2.10.tar.gz
+		URL_HASH SHA256=58fdb977c6678859c15d57942378b651399178f49a3a8ecad1813b9f231dc096
+		DOWNLOAD_EXTRACT_TIMESTAMP TRUE)
+	FetchContent_Declare(vst3sdk
+		URL https://github.com/steinbergmedia/vst3sdk/archive/refs/tags/${VST3_TAG}.tar.gz
+		URL_HASH SHA256=d93c12077d848977d4d397c8ab6721c4b4966223a7707bfe6519aa419c396af4
+		SOURCE_DIR ${VST3_DIR} SOURCE_SUBDIR niente DOWNLOAD_EXTRACT_TIMESTAMP TRUE)
+	FetchContent_Declare(vst3_base
+		URL https://github.com/steinbergmedia/vst3_base/archive/refs/tags/${VST3_TAG}.tar.gz
+		URL_HASH SHA256=001ef3dccf89505ee624766c8140c6c845fbd214460e02ea16145db29f1e2ed6
+		SOURCE_DIR ${VST3_DIR}/base SOURCE_SUBDIR niente DOWNLOAD_EXTRACT_TIMESTAMP TRUE)
+	FetchContent_Declare(vst3_pluginterfaces
+		URL https://github.com/steinbergmedia/vst3_pluginterfaces/archive/refs/tags/${VST3_TAG}.tar.gz
+		URL_HASH SHA256=c922f0a35f2c093dfcb24ccd95282e70d00cc2de42fc0c8ac1577398ffe7b6d4
+		SOURCE_DIR ${VST3_DIR}/pluginterfaces SOURCE_SUBDIR niente DOWNLOAD_EXTRACT_TIMESTAMP TRUE)
+	FetchContent_Declare(vst3_public_sdk
+		URL https://github.com/steinbergmedia/vst3_public_sdk/archive/refs/tags/${VST3_TAG}.tar.gz
+		URL_HASH SHA256=83b64e6666a54a35a2292a73ef35048b6d0dadd5e50a22cb437ac4cfb69ba81f
+		SOURCE_DIR ${VST3_DIR}/public.sdk SOURCE_SUBDIR niente DOWNLOAD_EXTRACT_TIMESTAMP TRUE)
+	FetchContent_Declare(clap-wrapper
+		URL https://github.com/free-audio/clap-wrapper/archive/refs/tags/v0.17.0.tar.gz
+		URL_HASH SHA256=50acbfc16a55f58b0b56a0aee7f4ebdcccb31ae5b8295cf80d28475b3a3cd43c
+		DOWNLOAD_EXTRACT_TIMESTAMP TRUE)
+	FetchContent_MakeAvailable(clap vst3sdk vst3_base vst3_pluginterfaces vst3_public_sdk)
+	set(VST3_SDK_ROOT ${VST3_DIR})
+	set(CMAKE_CXX_STANDARD 17) # clap-wrapper non compila in C++20 (base di gcc 16); RtMidi e' gia' fatta
+	FetchContent_MakeAvailable(clap-wrapper)
+
+	# il synth compilato a parte per il plugin; dentro una libreria dinamica (Linux, macOS) anche SDL
+	# deve essere PIC. Su Windows non cambia niente.
+	set_target_properties(SDL3-static PROPERTIES POSITION_INDEPENDENT_CODE ON)
+	add_library(storm_motore STATIC src/storm.c src/controlli.c src/psx_spu.c src/psx_gpu.c)
+	set_target_properties(storm_motore PROPERTIES POSITION_INDEPENDENT_CODE ON)
+	target_include_directories(storm_motore PUBLIC src originale_psx ${CMAKE_CURRENT_BINARY_DIR})
+	target_link_libraries(storm_motore PUBLIC SDL3::SDL3-static clap)
+	target_compile_options(storm_motore PRIVATE -Wall -Wextra -ffp-contract=off)
+	# La finestra del plugin dentro quella della DAW: l'unico codice diverso per sistema, un file per
+	# ognuno (src/finestra.h), scelto qui
+	if(WIN32)
+		target_sources(storm_motore PRIVATE src/finestra_win.c)
+		target_link_libraries(storm_motore PUBLIC user32 gdi32)
+	elseif(APPLE)
+		enable_language(OBJC)
+		target_sources(storm_motore PRIVATE src/finestra_mac.m)
+		target_link_libraries(storm_motore PUBLIC "-framework Cocoa" "-framework QuartzCore")
+	else()
+		find_package(X11 REQUIRED)
+		target_sources(storm_motore PRIVATE src/finestra_x11.c)
+		target_link_libraries(storm_motore PUBLIC X11::X11)
+	endif()
+	# plugin.c si compila dentro ogni formato (CLAP, VST3): le opzioni vanno sul file
+	set_source_files_properties(src/plugin.c PROPERTIES COMPILE_OPTIONS "-Wall;-Wextra;-ffp-contract=off")
+	make_clapfirst_plugins(
+		TARGET_NAME storm_plugin
+		IMPL_TARGET storm_motore
+		OUTPUT_NAME storm
+		ENTRY_SOURCE src/plugin.c
+		BUNDLE_IDENTIFIER storm.synth
+		BUNDLE_VERSION 0.1
+		COPY_AFTER_BUILD FALSE
+		WINDOWS_FOLDER_VST3 TRUE # su Windows la cartella storm.vst3\Contents\x86_64-win\, come vuole lo standard VST3
+		PLUGIN_FORMATS CLAP VST3
+		ASSET_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/plugin)
+	if(MINGW) # niente DLL di MSYS2 accanto al plugin, niente "lib" davanti al nome
+		target_link_options(storm_plugin_clap PRIVATE -static)
+		target_link_options(storm_plugin_vst3 PRIVATE -static)
+		set_target_properties(storm_plugin_clap storm_plugin_vst3 PROPERTIES PREFIX "")
+	endif()
+endif()
+
 if(APPLE)
 	# Info.plist dal modello di CMake; firma ad-hoc (senza account Apple) dopo ogni build
 	set_target_properties(storm PROPERTIES

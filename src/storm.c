@@ -1064,6 +1064,13 @@ static int scena_ora = -1, auto_on, auto_t; // scena caricata per ultima; AUTO: 
 static const char *smsg;                       // messaggio della pagina SCENE
 static int smsg_t;
 
+// PC, plugin: SAVE resta nei posti (che stanno nel progetto della DAW); il file delle scene si
+// scrive solo con EXPORT e si legge con IMPORT, due pulsanti in piu' nella pagina SCENE
+static int           plugin_si;
+static SDL_AtomicInt imp_chiesta;
+void storm_plugin(void) { plugin_si = 1; }
+static int pulsante(int x, int y, const char *nome, int on, int r, int g, int b, int tieni, const char *aiuto);
+
 static void patch_salva(uint8_t *p) {
 	p[0] = 'P';
 	p[1] = 2;
@@ -1471,7 +1478,15 @@ static void celle(const Quad *q, int c, int pp, int ed_posto, int ux) {
 		sprintf(r0, SU_GIU " SCENE %d %s", gposto + 1, posto(gposto)[0] == 'P' ? "SAVED" : "EMPTY");
 		sprintf(r1, SX_DX " MORPH %d S", morph_s[k[K_MORPH]]);
 		const char *rr[4] = { r0, r1, "L1 HOME  R1 GO", "L2 AUTO  R2 NUDGE" };
-		testo_uv(q, ux, 200, smsg_t ? smsg : "SCENES", 128, 104, 32);
+		if (plugin_si && !smsg_t) { // al posto del titolo, a destra (a sinistra c'e' il nome del pannello);
+			                        // il messaggio dell'ultimo comando li copre
+			int x, y, yd, w = largo("EXPORT") + largo("IMPORT") + 13;
+			mappa(q, 4000, 200, &x, &yd);
+			mappa(q, ux, 200, &yd, &y);
+			x += pulsante(x - w, y - 2, "EXPORT", 0, 60, 70, 100, 0, "EXPORT: WRITE THE 8 SCENES\nTO THE SCENE FILE") + 1 - w;
+			pulsante(x, y - 2, "IMPORT", 0, 60, 70, 100, 0, "IMPORT: READ THE 8 SCENES\nFROM THE SCENE FILE");
+		} else
+			testo_uv(q, ux, 200, smsg_t ? smsg : "SCENES", 128, 104, 32);
 		for (int j = 0; j < 4; j++) {
 			int x, y, v = 1150 + j * 800;
 			mappa(q, ux, v, &x, &y);
@@ -2269,6 +2284,8 @@ static void storm_azione(const Azione *a) {
 		if (err < -(1 << 23))     { d.clk = (1u << 24) - 1; d.s16 = e; } // in ritardo: suona al prossimo blocco
 		else if (err > (1 << 23)) { d.clk = 0; d.s16 = e + 1; }          // in anticipo: aspetta
 	}
+	else if (!strcmp(n, "EXPORT")) { if (plugin_si && m != SPENTO) { card_scrivi(); smsg = "EXPORTED"; smsg_t = 100; } }
+	else if (!strcmp(n, "IMPORT")) { if (plugin_si && m != SPENTO) SDL_SetAtomicInt(&imp_chiesta, 1); }
 	else if (!strcmp(n, "SINK"))   nt_pres = (int) (a->v * V99 + 0.5f); // pressione MIDI
 	else if (!strcmp(n, "MUTE"))   { if (!guida) muto = vuoi(muto, m); }
 	else if (!strcmp(n, "PLAY"))   { if (!guida) suona = vuoi(suona, m); }
@@ -2513,7 +2530,7 @@ void storm_fotogramma(void) {
 					if (posto(gposto)[0] == 'P' && !gconf) gconf = 1;
 					else {
 						patch_salva(posto(gposto));
-						card_scrivi();
+						if (!plugin_si) card_scrivi();
 						gmsg     = "SAVED";
 						gmsg_t   = 100;
 						gsalvato = gposto;
@@ -3031,3 +3048,45 @@ void storm_scene_ultimo(void) { if (scr_dopo) card_scrivi(); }
 
 // Per il modo prova: passo del tutorial aperto (dal primo = 1), 0 = chiuso
 int storm_passo(void) { return tut ? tut_passo + 1 : 0; }
+
+/* PC, plugin: tutto lo stato da rimettere riaprendo un progetto della DAW. Versione 1, 1160 byte:
+   patch attuale (come una scena), 8 posti, scena attiva, MUTE, PLAY, FREEZE, TAIL di prima di HOLD.
+   Dal thread del suono (o a suono fermo). */
+#define STATO_N (2 + 128 + N_POSTI * 128 + 6)
+int storm_stato(uint8_t *b, int n) {
+	if (n < STATO_N) return 0;
+	b[0] = 'S', b[1] = 1;
+	patch_salva(b + 2);
+	memcpy(b + 130, posto(0), N_POSTI * 128);
+	uint8_t *c = b + 130 + N_POSTI * 128;
+	c[0] = (uint8_t) (scena_ora + 1), c[1] = (uint8_t) muto, c[2] = (uint8_t) suona, c[3] = (uint8_t) freeze;
+	c[4] = (uint8_t) (hold_tail + 1), c[5] = 0;
+	return STATO_N;
+}
+
+// Al contrario di LOAD, subito e anche MORPH: il suono riparte com'era quando si e' salvato
+void storm_stato_carica(const uint8_t *b, int n) {
+	if (n < STATO_N || b[0] != 'S' || b[1] != 1 || b[2] != 'P') return;
+	const uint8_t *p = b + 2, *c = b + 130 + N_POSTI * 128;
+	for (int m = 0; m < 16; m++) { mdest[m >> 2][m & 3] = p[2 + N_K + m] % N_MDEST; mamt[m >> 2][m & 3] = clamp((int8_t) p[2 + N_K + 16 + m], -9, 9); }
+	for (int j = 0; j < N_K; j++) k[j] = clamp(p[2 + j], 0, k_max[j]);
+	carica = 0;
+	memcpy(posto(0), b + 130, N_POSTI * 128);
+	memcpy(casa, p, 128);
+	scena_ora = c[0] <= N_POSTI ? c[0] - 1 : -1;
+	muto = !!c[1], suona = !!c[2], freeze = !!c[3];
+	hold_tail = c[4] <= 100 ? c[4] - 1 : -1;
+}
+
+// Plugin: IMPORT premuto? (una volta, dal thread principale)
+int storm_scene_chiesta(void) { return SDL_SetAtomicInt(&imp_chiesta, 0); }
+
+// Plugin, dal thread del suono: le 8 scene di un file al posto di quelle di adesso (NULL = file che
+// non c'e'). I posti che il file non ha restano vuoti.
+void storm_scene_importa(const char *t, const char *nome) {
+	if (!t) { smsg = "NO SCENE FILE"; smsg_t = 100; return; }
+	for (int i = 0; i < N_POSTI; i++) posto(i)[0] = 0;
+	storm_scene_leggi(t, nome);
+	scena_ora = -1;
+	smsg = "IMPORTED", smsg_t = 100;
+}

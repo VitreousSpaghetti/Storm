@@ -12,7 +12,7 @@ Gli eseguibili per Windows, macOS e Linux si scaricano da
 |---|---|
 | `originale_psx/` | Sorgenti della versione PS1 (riferimento di sola lettura: suono e comportamento da rispettare) |
 | `standard/` | Standard dei controlli (MIDI, mouse, tastiera, gamepad), piattaforme e modo prova, riusabile per altri synth |
-| `src/` | Sorgenti C della versione PC: `storm.c` (il programma della PS1, cambiato il minimo), `psx.h` + `psx_spu.c` + `psx_gpu.c` (le funzioni PS1 che usa, fatte in software), `controlli.h` + `controlli.c` (standard dei controlli: tabella dei parametri, azioni comuni, tastiera del PC, gamepad, mouse e MIDI con il file di mappa; niente di storm dentro), `midi.c` (porte MIDI con RtMidi), `main.c` (finestra, audio, modo prova) |
+| `src/` | Sorgenti C della versione PC: `storm.c` (il programma della PS1, cambiato il minimo), `psx.h` + `psx_spu.c` + `psx_gpu.c` (le funzioni PS1 che usa, fatte in software), `controlli.h` + `controlli.c` (standard dei controlli: tabella dei parametri, azioni comuni, tastiera del PC, gamepad, mouse e MIDI con il file di mappa; niente di storm dentro), `midi.c` (porte MIDI con RtMidi), `main.c` (finestra, audio, modo prova), `plugin.c` (plugin CLAP e VST3 per le DAW), `finestra.h` + `finestra_win.c` / `finestra_mac.m` / `finestra_x11.c` (la finestra del plugin dentro la DAW, una per sistema) |
 | `prove/` | File di eventi del modo prova e `esegui.py` che li lancia tutti; in `prove/lunghe/` le prove di 10 minuti |
 | `mappe/` | Mappa MIDI predefinita (`storm.txt`, compilata dentro il programma) |
 | `script/` | Testi della GUIDE e del TUTORIAL (`testi.txt`) e `testi.py`, che li misura e scrive `src/testi.h` |
@@ -20,7 +20,9 @@ Gli eseguibili per Windows, macOS e Linux si scaricano da
 ## Compilare
 In generale vedi [standard/piattaforme/piattaforme.md](standard/piattaforme/piattaforme.md).
 Serve CMake 3.24 o piu' (lo chiedono RtMidi e, su macOS, SDL3).
-SDL3 (release 3.4.20) e RtMidi 6.0.0 si scaricano da soli alla prima configurazione.
+SDL3 (release 3.4.20) e RtMidi 6.0.0 si scaricano da soli alla prima configurazione; per il
+plugin (vedi **Plugin per DAW**) anche CLAP 1.2.10, clap-wrapper 0.17.0 e il VST3 SDK 3.8.0 di
+Steinberg (licenza MIT). Senza plugin: `-DSTORM_PLUGIN=OFF`.
 
 Su Windows con gcc di MSYS2 UCRT64 e cmake/ninja del PSn00bSDK (il PATH cambia solo dentro lo
 script):
@@ -49,9 +51,10 @@ Il risultato e' `build/storm`. Senza `libasound2-dev` la configurazione si ferma
 ci sarebbe il MIDI).
 
 `.github/workflows/build.yml` fa le stesse build su GitHub a ogni push, fa girare le prove sulle
-tre piattaforme (su macOS sia arm64 sia x86_64) e tiene i pacchetti: `storm-windows` (exe e questo
-file), `storm-macos.zip` (l'app), `storm-linux-x86_64.tar.gz` (il tar tiene il permesso di
-esecuzione), piu' gli `md5.txt` di WAV e foto, che devono essere uguali su tutte.
+tre piattaforme (su macOS sia arm64 sia x86_64) e tiene i pacchetti: `storm-windows` (exe, questo
+file e i plugin), `storm-macos.zip` (cartella `storm` con l'app e i plugin, universali e firmati
+ad-hoc), `storm-linux-x86_64.tar.gz` (exe e plugin; il tar tiene il permesso di esecuzione), piu'
+gli `md5.txt` di WAV e foto, che devono essere uguali su tutte.
 
 ## Avviare
 Il programma e' `build\storm.exe` su Windows, `build/storm.app` su macOS (dal terminale:
@@ -75,6 +78,48 @@ con le stesse opzioni sulle altre.
   Oppure dal terminale: `xattr -dr com.apple.quarantine storm.app`.
 - Linux: dopo aver scompattato il `.tar.gz`, `./storm` dalla sua cartella.
 
+## Plugin per DAW (CLAP e VST3)
+La build fa anche storm come strumento per le DAW, con lo schermo PS1 e il mouse dentro la DAW:
+
+| Formato | File | Dove copiarlo (Windows) |
+|---|---|---|
+| CLAP (Bitwig, Reaper, FL Studio...) | `build\plugin\CLAP\storm.clap` | `C:\Program Files\Common Files\CLAP\` |
+| VST3 (Ableton, Cubase, Reaper...) | la cartella `build\plugin\VST3\storm.vst3` intera | `C:\Program Files\Common Files\VST3\` |
+
+Su macOS i due pacchetti vanno in `~/Library/Audio/Plug-Ins/CLAP/` e `.../VST3/`, su Linux in
+`~/.clap/` e `~/.vst3/`.
+
+- **Finestra**: lo schermo 320x256 ingrandito (di base x3, si ridimensiona a multipli interi), col
+  mouse come nel programma. Niente tastiera del PC (la tiene la DAW). La finestra si aggiorna e
+  risponde solo mentre la DAW fa suonare il plugin.
+- **MIDI**: la tastiera si collega alla traccia della DAW (ingresso MIDI della traccia, traccia
+  armata o in ascolto). Note, CC, pitch bend e program change passano dalla stessa mappa della
+  tastiera MIDI (`mappe/storm.txt`, piu' `mappa.txt` dell'utente se c'e'); il program change 1-8
+  richiama le scene 1-8.
+- **MIDI learn**: tasto destro su una manopola nella finestra > LEARN, poi muovi il controllo della
+  tastiera; CLEAR toglie l'assegnazione. Come nel programma l'assegnazione va in `mappa.txt` (vale
+  anche per il programma e per gli altri progetti), e in piu' resta nel progetto della DAW.
+- **Scene**: GUIDE > SAVE SCENE salva nei posti, che stanno nel progetto della DAW (non nel file).
+  Un plugin nuovo parte con le scene di `scene.txt`. Nella pagina SCENE, al posto del titolo, due
+  pulsanti: **EXPORT** scrive gli 8 posti in `scene.txt` (cosi' li ritrova il programma),
+  **IMPORT** li sostituisce con quelli di `scene.txt` (i posti che il file non ha restano vuoti).
+- **Tempo della DAW**: col play il CLOCK di storm segue BPM e posizione della DAW (nella pagina CLOCK
+  il BPM ha la "E", come col clock MIDI) e parte sul battito; con lo stop si ferma e dopo 2 s torna
+  al suo tempo. Il clock MIDI della traccia conta solo se la DAW non da' il tempo.
+- I parametri della tabella (`--parametri`, tranne TAP e NUDGE) sono parametri della DAW: si
+  automatizzano, e i cambi fatti col mouse o dal MIDI arrivano alla DAW (si possono registrare come
+  automazione).
+- **Il progetto salva tutto**: manopole, destinazioni e quantita' dei MOD, gli 8 posti delle scene,
+  la scena attiva, PLAY, MUTE, FREEZE e HOLD. I progetti salvati con la versione di prima (solo i
+  parametri) si aprono ancora.
+- La SPU suona sempre a 44100 Hz come sulla PS1; se la DAW va a 48000 o 96000 Hz il plugin converte.
+  A 44100 Hz il suono e' identico a quello del programma.
+- **Piu' istanze**: dalla seconda in poi il plugin usa una copia di se stesso (circa 10 MB) nella
+  cartella dei dati (`%APPDATA%\storm\istanze\`, `~/Library/Application Support/storm/istanze/`,
+  `~/.local/share/storm/istanze/`), cancellata quando l'istanza si chiude. Se la copia non riesce
+  (antivirus, permessi) quell'istanza resta muta.
+- Non ci sono: tastiera del PC e gamepad nel plugin.
+
 ## Stato
 | Parte | Stato |
 |---|---|
@@ -85,6 +130,7 @@ con le stesse opzioni sulle altre.
 | Mouse (tutto suonabile col solo mouse) | fatto; verificato in modo prova (`prove/mouse.txt`, `prove/mouse_casi.txt`, `prove/tutorial.txt`: anche il TUTORIAL col solo mouse); mouse vero da provare |
 | MIDI: note, CC fissi e di pagina col soft takeover, encoder, 14 bit, pitch bend, pressione, pedale, program change, clock esterno, MIDI learn, porte collegate a programma acceso | fatto; verificato in modo prova (`prove/midi.txt`); tastiera MIDI vera da provare; macOS e Linux non provati |
 | Scene su file (`scene.txt`) | fatto; verificato in modo prova (`prove/scene.txt`, `prove/scene_riapri.txt`, `prove/scene_file.txt`); nella finestra da provare |
+| Plugin CLAP e VST3 (finestra, piu' istanze, stato completo, tempo della DAW) | fatto; Windows: provato con un host di prova (3 istanze, finestra col mouse, stato, tempo, a 44100 identico al programma), VST3 passa il validatore di Steinberg; in una DAW vera, finestra su macOS e Linux non provati |
 
 Come suona: il codice del synth e' quello della PS1; sotto c'e' una SPU in software che fa le
 stesse cose dell'hardware (stessa decodifica ADPCM, interpolazione, inviluppi, riverbero a 22050 Hz).
