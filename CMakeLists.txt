@@ -7,6 +7,11 @@ set(CMAKE_OSX_DEPLOYMENT_TARGET 11.0 CACHE STRING "")
 
 # C++ serve solo per compilare RtMidi
 project(storm LANGUAGES C CXX)
+# macOS: Objective-C per la finestra del plugin, Objective-C++ per clap-wrapper. I linguaggi vanno
+# accesi qui nel progetto principale: accesi in una sottocartella CMake non genera le loro regole
+if(APPLE)
+	enable_language(OBJC OBJCXX)
+endif()
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
@@ -103,13 +108,15 @@ if(STORM_PLUGIN)
 	FetchContent_MakeAvailable(clap vst3sdk vst3_base vst3_pluginterfaces vst3_public_sdk)
 	set(VST3_SDK_ROOT ${VST3_DIR})
 	set(CMAKE_CXX_STANDARD 17) # clap-wrapper non compila in C++20 (base di gcc 16); RtMidi e' gia' fatta
+	# Tutto quello che va dentro il plugin (una libreria dinamica) deve essere PIC su Linux e macOS:
+	# il synth, SDL e le librerie del VST3 che make_clapfirst_plugins crea in questa cartella
+	# (clap-wrapper accende PIC solo nella sua). storm (l'exe) e' gia' fatto sopra e non cambia; su
+	# Windows non cambia niente.
+	set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 	FetchContent_MakeAvailable(clap-wrapper)
 
-	# il synth compilato a parte per il plugin; dentro una libreria dinamica (Linux, macOS) anche SDL
-	# deve essere PIC. Su Windows non cambia niente.
 	set_target_properties(SDL3-static PROPERTIES POSITION_INDEPENDENT_CODE ON)
 	add_library(storm_motore STATIC src/storm.c src/controlli.c src/psx_spu.c src/psx_gpu.c)
-	set_target_properties(storm_motore PROPERTIES POSITION_INDEPENDENT_CODE ON)
 	target_include_directories(storm_motore PUBLIC src originale_psx ${CMAKE_CURRENT_BINARY_DIR})
 	target_link_libraries(storm_motore PUBLIC SDL3::SDL3-static clap)
 	target_compile_options(storm_motore PRIVATE -Wall -Wextra -ffp-contract=off)
@@ -119,7 +126,6 @@ if(STORM_PLUGIN)
 		target_sources(storm_motore PRIVATE src/finestra_win.c)
 		target_link_libraries(storm_motore PUBLIC user32 gdi32)
 	elseif(APPLE)
-		enable_language(OBJC)
 		target_sources(storm_motore PRIVATE src/finestra_mac.m)
 		target_link_libraries(storm_motore PUBLIC "-framework Cocoa" "-framework QuartzCore")
 	else()
